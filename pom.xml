@@ -21,9 +21,12 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <java.version>11</java.version>
+        <java.version>8</java.version>
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
+
+        <!-- 三方依赖引入 -->
+        <ss-parent.version>1.0.0-SNAPSHOT</ss-parent.version>
     </properties>
 
     <dependencyManagement>
@@ -31,7 +34,7 @@
             <dependency>
                 <groupId>com.ss</groupId>
                 <artifactId>ss-parent</artifactId>
-                <version>1.0.0-SNAPSHOT</version>
+                <version>${ss-parent.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
