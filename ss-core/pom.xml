@@ -105,6 +105,11 @@
             <artifactId>spring-cloud-alibaba-dubbo</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
+        </dependency>
+
         <!--JWT-->
         <dependency>
             <groupId>org.springframework.boot</groupId>

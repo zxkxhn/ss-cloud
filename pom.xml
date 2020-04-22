@@ -26,7 +26,7 @@
         <maven.compiler.target>${java.version}</maven.compiler.target>
 
         <!-- 三方依赖引入 -->
-        <ss-parent.version>1.0.0-SNAPSHOT</ss-parent.version>
+        <ss.parent.version>1.0.0-SNAPSHOT</ss.parent.version>
     </properties>
 
     <dependencyManagement>
@@ -34,7 +34,7 @@
             <dependency>
                 <groupId>com.ss</groupId>
                 <artifactId>ss-parent</artifactId>
-                <version>${ss-parent.version}</version>
+                <version>${ss.parent.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
