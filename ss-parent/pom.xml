@@ -35,8 +35,10 @@
         <shardingsphere.version>4.0.1</shardingsphere.version>
         <rocketmq.version>2.1.0</rocketmq.version>
         <jjwt.version>0.9.1</jjwt.version>
-
         <spring.cloud.alibaba.version>2.2.0.RELEASE</spring.cloud.alibaba.version>
+
+        <!-- 三方依赖冲突的jar 版本控制 -->
+        <guava.version>22.0</guava.version>
     </properties>
 
     <dependencyManagement>
@@ -129,6 +131,12 @@
                 <version>${jjwt.version}</version>
             </dependency>
 
+
+            <dependency>
+                <artifactId>guava</artifactId>
+                <groupId>com.google.guava</groupId>
+                <version>${guava.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
