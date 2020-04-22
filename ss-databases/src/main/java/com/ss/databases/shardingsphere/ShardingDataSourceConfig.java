@@ -1,4 +1,4 @@
-package com.ss.core.config.shardingsphere;
+package com.ss.databases.shardingsphere;
 
 import cn.hutool.core.io.IoUtil;
 import com.alibaba.druid.filter.Filter;
@@ -22,7 +22,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.Properties;
 
 /**
  * 分库分表Sharding-jdbc 装配

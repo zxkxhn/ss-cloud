@@ -1,16 +1,10 @@
 package com.ss.core.common;
 
-import cn.hutool.core.collection.CollectionUtil;
-import cn.hutool.core.util.StrUtil;
-import com.baomidou.mybatisplus.core.metadata.OrderItem;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
 @Slf4j
@@ -31,24 +25,24 @@ public class BaseQuery<T> implements Serializable {
 
     @ApiModelProperty(value = "排序字段")
     private Map<String, Boolean> orderItem;
-
-    @ApiModelProperty(hidden = true)
-    public Page<T> page() {
-        Page<T> page = new Page<>(this.getCurrent(),this.getSize());
-        if(CollectionUtil.isEmpty(orderItem)){
-            return page;
-        }
-        List<OrderItem> orderItemList = new ArrayList<>();
-        orderItem.forEach((k,v)->{
-            if (StrUtil.isBlank(k) || v == null) {
-                return;
-            }
-            OrderItem orderItem = new OrderItem();
-            orderItem.setColumn(k);
-            orderItem.setAsc(v);
-            orderItemList.add(orderItem);
-        });
-        page.setOrders(orderItemList);
-        return page;
-    }
+//
+//    @ApiModelProperty(hidden = true)
+//    public Page<T> page() {
+//        Page<T> page = new Page<>(this.getCurrent(),this.getSize());
+//        if(CollectionUtil.isEmpty(orderItem)){
+//            return page;
+//        }
+//        List<OrderItem> orderItemList = new ArrayList<>();
+//        orderItem.forEach((k,v)->{
+//            if (StrUtil.isBlank(k) || v == null) {
+//                return;
+//            }
+//            OrderItem orderItem = new OrderItem();
+//            orderItem.setColumn(k);
+//            orderItem.setAsc(v);
+//            orderItemList.add(orderItem);
+//        });
+//        page.setOrders(orderItemList);
+//        return page;
+//    }
 }

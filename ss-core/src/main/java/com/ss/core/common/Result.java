@@ -1,12 +1,10 @@
 package com.ss.core.common;
 
-import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.ss.core.exception.SystemErrorTypeEnum;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 import java.io.Serializable;
-import java.util.List;
 
 //@ApiModel(value = "Result", description = "接口返回对象" )
 @Data
@@ -77,17 +75,6 @@ public class Result<T> implements Serializable {
         return new Result<>(SystemErrorTypeEnum.SUCCESS);
     }
 
-
-    /**
-     * 快速创建成功结果并返回结果数据
-     *
-     * @param
-     * @return Result
-     */
-    public static <T> Result<PageVO<T>> page(List<T> records, IPage<?> iPage) {
-        PageVO<T> pageVO = new PageVO<>(records, iPage.getTotal(), iPage.getSize(), iPage.getCurrent());
-        return Result.success(pageVO);
-    }
 
     /**
      * 系统异常类没有返回数据

@@ -1,4 +1,4 @@
-package com.ss.core.config;
+package com.ss.databases.config;
 
 
 import com.baomidou.mybatisplus.extension.plugins.PaginationInterceptor;
@@ -17,7 +17,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
  */
 @EnableTransactionManagement
 @Configuration
-@MapperScan("com.zxk.admin.biz.dao")
+@MapperScan("com.*.*.biz.dao")
 public class MybatisPlusConfig {
 
     @Bean
