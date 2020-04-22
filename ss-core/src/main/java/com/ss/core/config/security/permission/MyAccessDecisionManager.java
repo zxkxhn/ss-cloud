@@ -14,6 +14,7 @@ import java.util.Collection;
 /**
  * 权限管理决断器
  * 判断用户拥有的权限或角色是否有资源访问权限
+ *
  * @author Exrickx
  */
 @Slf4j
@@ -23,7 +24,7 @@ public class MyAccessDecisionManager implements AccessDecisionManager {
     @Override
     public void decide(Authentication authentication, Object o, Collection<ConfigAttribute> configAttributes) throws AccessDeniedException, InsufficientAuthenticationException {
 
-        if(configAttributes==null){
+        if (configAttributes == null) {
             return;
         }
         for (ConfigAttribute c : configAttributes) {

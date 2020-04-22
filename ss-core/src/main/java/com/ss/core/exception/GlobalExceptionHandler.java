@@ -18,50 +18,51 @@ import java.util.Map;
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
-	/**
-	 * 处理自定义异常
-	 */
-	@ExceptionHandler(CustomizeException.class)
-	public Result<String> handleCustomizeException(CustomizeException e){
-		log.error(e.getMessage(), e);
-		return Result.fail(e.getCode(), e.getMsg());
-	}
+    /**
+     * 处理自定义异常
+     */
+    @ExceptionHandler(CustomizeException.class)
+    public Result<String> handleCustomizeException(CustomizeException e) {
+        log.error(e.getMessage(), e);
+        return Result.fail(e.getCode(), e.getMsg());
+    }
 
-	/**
-	 * 参数校验异常
-	 * @ RequestBody 专用
-	 */
-	@ExceptionHandler(MethodArgumentNotValidException.class)
-	public Result<String> handleMethodArgumentNotValidException(MethodArgumentNotValidException e){
-		log.error("参数校验错误： {}", e.getMessage());
-		List<FieldError> bindingResult = e.getBindingResult().getFieldErrors();
-		Map<String, String> validMap = new HashMap<>(bindingResult.size());
-		for (FieldError fieldError : bindingResult) {
-			validMap.put(fieldError.getField(), fieldError.getDefaultMessage());
-		}
-		return Result.fail(SystemErrorTypeEnum.VALID_FORM, JSONObject.toJSONString(validMap));
-	}
-
-
-	@ExceptionHandler(BindException.class)
-	public Result<String> handleBindExceptionException(BindException e){
-		log.error("参数校验错误： {}", e.getMessage());
-		List<FieldError> bindingResult = e.getBindingResult().getFieldErrors();
-		Map<String, String> validMap = new HashMap<>(bindingResult.size());
-		for (FieldError fieldError : bindingResult) {
-			validMap.put(fieldError.getField(), fieldError.getDefaultMessage());
-		}
-		return Result.fail(SystemErrorTypeEnum.VALID_FORM, JSONObject.toJSONString(validMap));
-	}
+    /**
+     * 参数校验异常
+     *
+     * @ RequestBody 专用
+     */
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public Result<String> handleMethodArgumentNotValidException(MethodArgumentNotValidException e) {
+        log.error("参数校验错误： {}", e.getMessage());
+        List<FieldError> bindingResult = e.getBindingResult().getFieldErrors();
+        Map<String, String> validMap = new HashMap<>(bindingResult.size());
+        for (FieldError fieldError : bindingResult) {
+            validMap.put(fieldError.getField(), fieldError.getDefaultMessage());
+        }
+        return Result.fail(SystemErrorTypeEnum.VALID_FORM, JSONObject.toJSONString(validMap));
+    }
 
 
-	/**
-	 * 其他异常处理
-	 */
-	@ExceptionHandler(Exception.class)
-	public Result<String> handleException(Exception e){
-		log.error(e.getMessage(), e);
-		return Result.fail();
-	}
+    @ExceptionHandler(BindException.class)
+    public Result<String> handleBindExceptionException(BindException e) {
+        log.error("参数校验错误： {}", e.getMessage());
+        List<FieldError> bindingResult = e.getBindingResult().getFieldErrors();
+        Map<String, String> validMap = new HashMap<>(bindingResult.size());
+        for (FieldError fieldError : bindingResult) {
+            validMap.put(fieldError.getField(), fieldError.getDefaultMessage());
+        }
+        return Result.fail(SystemErrorTypeEnum.VALID_FORM, JSONObject.toJSONString(validMap));
+    }
+
+
+    /**
+     * 其他异常处理
+     */
+    @ExceptionHandler(Exception.class)
+    public Result<String> handleException(Exception e) {
+        log.error(e.getMessage(), e);
+        return Result.fail();
+    }
 
 }

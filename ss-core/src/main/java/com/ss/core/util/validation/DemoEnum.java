@@ -6,7 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Getter
-public enum DemoEnum{
+public enum DemoEnum {
 
     /**
      * value 返回码
@@ -15,10 +15,7 @@ public enum DemoEnum{
      */
     DIRECTORY(0, "目录"),
     MENU(1, "菜单"),
-    BUTTON(2, "按钮")
-
-
-    ;
+    BUTTON(2, "按钮");
 
     private int value;
     private String desc;

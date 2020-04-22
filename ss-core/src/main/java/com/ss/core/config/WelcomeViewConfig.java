@@ -6,6 +6,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 /**
  * 设置默认访问界面
+ *
  * @author zxk
  */
 @Configuration

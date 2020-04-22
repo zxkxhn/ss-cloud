@@ -11,15 +11,15 @@ import org.springframework.context.annotation.Configuration;
  * druid 装配
  *
  * @author xiaokun.zhang
- * @Date:   2019年11月25日 13:45
  * @version 1.0
+ * @Date: 2019年11月25日 13:45
  */
 
 @Configuration
 public class DruidConfig {
 
     @Bean
-    public Filter statFilter(){
+    public Filter statFilter() {
         StatFilter filter = new StatFilter();
         filter.setSlowSqlMillis(5000);
         filter.setLogSlowSql(true);
@@ -28,16 +28,16 @@ public class DruidConfig {
     }
 
     @Bean
-    public ServletRegistrationBean<StatViewServlet> statViewServlet(){
+    public ServletRegistrationBean<StatViewServlet> statViewServlet() {
         //创建servlet注册实体
-        ServletRegistrationBean<StatViewServlet> servletRegistrationBean = new ServletRegistrationBean<>(new StatViewServlet(),"/druid/*");
+        ServletRegistrationBean<StatViewServlet> servletRegistrationBean = new ServletRegistrationBean<>(new StatViewServlet(), "/druid/*");
         //设置ip白名单
-        servletRegistrationBean.addInitParameter("allow","127.0.0.1");
+        servletRegistrationBean.addInitParameter("allow", "127.0.0.1");
         //设置控制台管理用户
-        servletRegistrationBean.addInitParameter("loginUsername","admin");
-        servletRegistrationBean.addInitParameter("loginPassword","123456");
+        servletRegistrationBean.addInitParameter("loginUsername", "admin");
+        servletRegistrationBean.addInitParameter("loginPassword", "123456");
         //是否可以重置数据
-        servletRegistrationBean.addInitParameter("resetEnable","true");
+        servletRegistrationBean.addInitParameter("resetEnable", "true");
         return servletRegistrationBean;
     }
 }

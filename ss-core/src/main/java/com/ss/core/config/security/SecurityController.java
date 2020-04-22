@@ -28,8 +28,8 @@ public class SecurityController {
 
     @GetMapping(value = "/needLogin")
     @ApiOperation(value = "没有登录")
-    public Result<Object> needLogin(){
-        return Result.fail(SystemErrorTypeEnum.JWT_TOKEN_ERROR,"您还未登录");
+    public Result<Object> needLogin() {
+        return Result.fail(SystemErrorTypeEnum.JWT_TOKEN_ERROR, "您还未登录");
     }
 
     @GetMapping(value = "/login")
@@ -40,7 +40,7 @@ public class SecurityController {
                                        @ApiParam("记住密码") @RequestParam(required = false, defaultValue = "true") Boolean saveLogin,
                                        @ApiParam("可自定义登录接口地址")
                                        @RequestParam(required = false, defaultValue = "http://127.0.0.1:8081/login")
-                                               String loginUrl){
+                                               String loginUrl) {
 
         Map<String, Object> params = new HashMap<>(16);
         params.put("username", username);
@@ -52,6 +52,6 @@ public class SecurityController {
 
         JSONObject jsonObject = JSONObject.parseObject(result);
 
-        return new Result<>(jsonObject.getInteger("code"),jsonObject.getString("msg"));
+        return new Result<>(jsonObject.getInteger("code"), jsonObject.getString("msg"));
     }
 }

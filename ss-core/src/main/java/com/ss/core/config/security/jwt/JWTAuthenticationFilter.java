@@ -69,7 +69,7 @@ public class JWTAuthenticationFilter extends BasicAuthenticationFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws IOException, ServletException {
 
         // 如果是过滤的地址就不需要验证
-        if(ignoredUrlsProperties.getUrls().contains(request.getRequestURI())){
+        if (ignoredUrlsProperties.getUrls().contains(request.getRequestURI())) {
             chain.doFilter(request, response);
         }
 
@@ -77,7 +77,7 @@ public class JWTAuthenticationFilter extends BasicAuthenticationFilter {
         if (StrUtil.isBlank(header)) {
             header = request.getParameter(SecurityConstant.HEADER);
         }
-        boolean notValid = StrUtil.isBlank(header)  ||(!tokenProperties.getRedis() && !header.startsWith(SecurityConstant.TOKEN_SPLIT));
+        boolean notValid = StrUtil.isBlank(header) || (!tokenProperties.getRedis() && !header.startsWith(SecurityConstant.TOKEN_SPLIT));
         if (notValid) {
             chain.doFilter(request, response);
             return;

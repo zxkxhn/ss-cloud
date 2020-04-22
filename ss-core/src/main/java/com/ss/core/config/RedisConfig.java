@@ -12,7 +12,7 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
  * redis 配置
  */
 @Configuration
-public class RedisConfig{
+public class RedisConfig {
 
     /**
      * 设置 redisTemplate 序列化方式
@@ -35,7 +35,6 @@ public class RedisConfig{
 //        redisTemplate.afterPropertiesSet();
 //        return redisTemplate;
 //    }
-
     @Bean
     public RedisTemplate<Object, Object> redisTemplate(RedisConnectionFactory redisConnectionFactory) {
         // 1.创建 redisTemplate 模版
@@ -53,8 +52,6 @@ public class RedisConfig{
         template.afterPropertiesSet();
         return template;
     }
-
-
 
 
 }

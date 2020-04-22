@@ -12,6 +12,7 @@ import java.util.Collection;
 /**
  * 权限资源管理器
  * 为权限决断器提供支持
+ *
  * @author Exrickx
  */
 @Slf4j
@@ -22,7 +23,7 @@ public class MySecurityMetadataSource implements FilterInvocationSecurityMetadat
     /**
      * 加载权限表中所有操作请求权限
      */
-    public void loadResourceDefine(){
+    public void loadResourceDefine() {
 
 
     }
@@ -31,6 +32,7 @@ public class MySecurityMetadataSource implements FilterInvocationSecurityMetadat
      * 判定用户请求的url是否在权限表中
      * 如果在权限表中，则返回给decide方法，用来判定用户是否有此权限
      * 如果不在权限表中则放行
+     *
      * @param o
      * @return
      * @throws IllegalArgumentException

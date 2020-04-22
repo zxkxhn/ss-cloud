@@ -10,7 +10,7 @@ public class LoginFailLimitException extends InternalAuthenticationServiceExcept
 
     private String msg;
 
-    public LoginFailLimitException(String msg){
+    public LoginFailLimitException(String msg) {
         super(msg);
         this.msg = msg;
     }

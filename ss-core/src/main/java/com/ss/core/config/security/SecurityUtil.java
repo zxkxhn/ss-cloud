@@ -122,11 +122,13 @@ public class SecurityUtil {
 //        }
 //    }
 //
+
     /**
      * 通过用户名获取用户拥有权限
+     *
      * @param username
      */
-    public List<GrantedAuthority> getCurrUserPerms(String username){
+    public List<GrantedAuthority> getCurrUserPerms(String username) {
         return securityService.getCurrUserPerms(username);
     }
 

@@ -21,6 +21,6 @@ public class TraceInterceptor extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws IOException, ServletException {
         MDC.put(Constants.LOG_TRACE_ID, IdUtil.fastSimpleUUID());
         log.debug("Http - {} , Method - {}", request.getRequestURI(), request.getMethod());
-        filterChain.doFilter(request,response);
+        filterChain.doFilter(request, response);
     }
 }

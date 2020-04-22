@@ -22,7 +22,7 @@ public class EnumValidator implements ConstraintValidator<Enum, String> {
 
     @Override
     public boolean isValid(String value, ConstraintValidatorContext constraintValidatorContext) {
-        if(!enumClass.isEnum()){
+        if (!enumClass.isEnum()) {
             throw new ClassCastException("null enum error");
         }
 
