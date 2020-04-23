@@ -1,4 +1,4 @@
-package com.ss.core.config.security.exception;
+package com.ss.security.exception;
 
 import lombok.Getter;
 import org.springframework.security.authentication.InternalAuthenticationServiceException;

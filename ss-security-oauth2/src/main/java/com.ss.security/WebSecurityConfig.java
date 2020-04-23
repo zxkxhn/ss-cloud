@@ -1,14 +1,14 @@
-package com.ss.core.config.security;
+package com.ss.security;
 
 
-import com.ss.core.config.security.jwt.AuthenticationFailHandler;
-import com.ss.core.config.security.jwt.AuthenticationSuccessHandler;
-import com.ss.core.config.security.jwt.JWTAuthenticationFilter;
-import com.ss.core.config.security.jwt.RestAccessDeniedHandler;
-import com.ss.core.config.security.permission.MyFilterSecurityInterceptor;
-import com.ss.core.config.security.properties.IgnoredUrlsProperties;
-import com.ss.core.config.security.properties.TokenProperties;
-import com.ss.core.config.security.validate.ImageValidateFilter;
+import com.ss.security.jwt.AuthenticationFailHandler;
+import com.ss.security.jwt.AuthenticationSuccessHandler;
+import com.ss.security.jwt.JWTAuthenticationFilter;
+import com.ss.security.jwt.RestAccessDeniedHandler;
+import com.ss.security.permission.MyFilterSecurityInterceptor;
+import com.ss.security.properties.IgnoredUrlsProperties;
+import com.ss.security.properties.TokenProperties;
+import com.ss.security.validate.ImageValidateFilter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.core.StringRedisTemplate;

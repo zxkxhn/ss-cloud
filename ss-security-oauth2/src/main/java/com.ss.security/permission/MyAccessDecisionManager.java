@@ -1,4 +1,4 @@
-package com.ss.core.config.security.permission;
+package com.ss.security.permission;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.access.AccessDecisionManager;

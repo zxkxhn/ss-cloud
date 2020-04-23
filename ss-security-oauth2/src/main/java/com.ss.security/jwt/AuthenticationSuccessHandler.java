@@ -1,13 +1,12 @@
-package com.ss.core.config.security.jwt;
+package com.ss.security.jwt;
 
 
 import cn.hutool.core.util.StrUtil;
 import com.alibaba.fastjson.JSONObject;
-import com.ss.core.config.security.constant.SecurityConstant;
-import com.ss.core.config.security.properties.TokenProperties;
-import com.ss.core.util.IPUtils;
-import com.ss.core.util.ResponseUtil;
-import com.ss.core.config.security.TokenUser;
+import com.ss.security.TokenUser;
+import com.ss.security.constant.SecurityConstant;
+import com.ss.security.properties.TokenProperties;
+import com.ss.security.util.ResponseUtil;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import lombok.extern.slf4j.Slf4j;
@@ -56,7 +55,6 @@ public class AuthenticationSuccessHandler extends SavedRequestAwareAuthenticatio
         for(GrantedAuthority g : authorities){
             list.add(g.getAuthority());
         }
-        IPUtils.getIpAddr(request);
         // 登陆成功生成token
         String token;
         if(tokenProperties.getRedis()){
@@ -99,6 +97,7 @@ public class AuthenticationSuccessHandler extends SavedRequestAwareAuthenticatio
                     .compact();
         }
 
-        ResponseUtil.out(response, ResponseUtil.resultMap(true,200,"登录成功", token));
+        ResponseUtil.out(response, 200, "登录成功", token);
+
     }
 }

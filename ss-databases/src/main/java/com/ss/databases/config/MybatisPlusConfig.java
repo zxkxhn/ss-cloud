@@ -3,6 +3,8 @@ package com.ss.databases.config;
 
 import com.baomidou.mybatisplus.extension.plugins.PaginationInterceptor;
 import org.mybatis.spring.annotation.MapperScan;
+import org.mybatis.spring.mapper.MapperScannerConfigurer;
+import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
@@ -17,7 +19,6 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
  */
 @EnableTransactionManagement
 @Configuration
-@MapperScan("com.*.*.biz.dao")
 public class MybatisPlusConfig {
 
     @Bean

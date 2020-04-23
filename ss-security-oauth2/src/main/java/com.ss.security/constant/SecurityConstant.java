@@ -1,4 +1,4 @@
-package com.ss.core.config.security.constant;
+package com.ss.security.constant;
 
 /**
  * @author Exrickx

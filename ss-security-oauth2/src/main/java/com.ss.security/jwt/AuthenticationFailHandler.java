@@ -1,10 +1,9 @@
-package com.ss.core.config.security.jwt;
+package com.ss.security.jwt;
 
 import cn.hutool.core.util.StrUtil;
-import com.ss.core.config.security.exception.LoginFailLimitException;
-import com.ss.core.config.security.properties.TokenProperties;
-import com.ss.core.util.ResponseUtil;
-import com.ss.core.common.Result;
+import com.ss.security.exception.LoginFailLimitException;
+import com.ss.security.properties.TokenProperties;
+import com.ss.security.util.ResponseUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -48,18 +47,18 @@ public class AuthenticationFailHandler extends SimpleUrlAuthenticationFailureHan
             int restLoginTime = tokenProperties.getLoginTimeLimit() - loginFailTime;
             log.info("用户" + username + "登录失败，还有" + restLoginTime + "次机会");
             if (restLoginTime <= 3 && restLoginTime > 0) {
-                ResponseUtil.out(response, Result.fail("用户名或密码错误，还有" + restLoginTime + "次尝试机会"));
+                ResponseUtil.out(response, 500, "用户名或密码错误，还有" + restLoginTime + "次尝试机会");
             } else if (restLoginTime <= 0) {
-                ResponseUtil.out(response, Result.fail("登录错误次数超过限制，请" + tokenProperties.getLoginAfterTime() + "分钟后再试"));
+                ResponseUtil.out(response, 500, "登录错误次数超过限制，请" + tokenProperties.getLoginAfterTime() + "分钟后再试");
             } else {
-                ResponseUtil.out(response, Result.fail("用户名或密码错误"));
+                ResponseUtil.out(response, 500, "用户名或密码错误");
             }
         } else if (e instanceof DisabledException) {
-            ResponseUtil.out(response, Result.fail("账户被禁用，请联系管理员"));
+            ResponseUtil.out(response, 500, "账户被禁用，请联系管理员");
         } else if (e instanceof LoginFailLimitException) {
-            ResponseUtil.out(response, Result.fail(e.getMessage()));
+            ResponseUtil.out(response, 500, e.getMessage());
         } else {
-            ResponseUtil.out(response, ResponseUtil.resultMap(false, 500, "登录失败，其他内部错误"));
+            ResponseUtil.out(response, 500, "登录失败，其他内部错误");
         }
     }
 

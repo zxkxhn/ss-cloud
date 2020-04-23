@@ -1,4 +1,4 @@
-package com.ss.core.config.security.service;
+package com.ss.security.service;
 
 
 import org.springframework.security.core.GrantedAuthority;
