@@ -71,11 +71,11 @@
     <distributionManagement>
         <repository>
             <id>rdc-releases</id>
-            <url>https://repo.rdc.aliyun.com/repository/110747-release-RBdR4x/</url>
+            <url>https://packages.aliyun.com/maven/repository/2000858-release-kuGoAj/</url>
         </repository>
         <snapshotRepository>
             <id>rdc-snapshots</id>
-            <url>https://repo.rdc.aliyun.com/repository/110747-snapshot-WQvrDI/</url>
+            <url>https://packages.aliyun.com/maven/repository/2000858-snapshot-UA11zh/</url>
         </snapshotRepository>
     </distributionManagement>
 
