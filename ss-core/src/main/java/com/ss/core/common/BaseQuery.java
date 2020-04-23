@@ -15,12 +15,12 @@ public class BaseQuery<T> implements Serializable {
     /**
      * 分页查询的参数，当前页数
      */
-    @ApiModelProperty(value = "当前页数" , example = "1")
+    @ApiModelProperty(value = "当前页数", example = "1")
     private long current = 1;
     /**
      * 分页查询的参数，当前页面每页显示的数量
      */
-    @ApiModelProperty(value = "分页大小" ,example = "20")
+    @ApiModelProperty(value = "分页大小", example = "20")
     private long size = 20;
 
     @ApiModelProperty(value = "排序字段")

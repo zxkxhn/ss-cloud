@@ -16,6 +16,7 @@ public interface SecurityService {
 
     /**
      * 获取用户信息
+     *
      * @param username 用户名
      */
     UserDetails getUserDetail(String username);
@@ -23,6 +24,7 @@ public interface SecurityService {
 
     /**
      * 获取用户所有权限
+     *
      * @param username
      * @return
      */
@@ -30,7 +32,6 @@ public interface SecurityService {
 
 
     void clearUserToken(String username);
-
 
 
 }

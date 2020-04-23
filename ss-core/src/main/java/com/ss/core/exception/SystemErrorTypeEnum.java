@@ -9,8 +9,8 @@ import java.util.Map;
 public enum SystemErrorTypeEnum {
 
     /**
-     *  code 返回码
-     *  msg 错误信息
+     * code 返回码
+     * msg 错误信息
      */
     SUCCESS(200, "成功"),
     VALID_FORM(201, "参数校验失败"),
@@ -44,7 +44,7 @@ public enum SystemErrorTypeEnum {
     }
 
 
-    public static SystemErrorTypeEnum valueOf(int code){
+    public static SystemErrorTypeEnum valueOf(int code) {
         return map.get(code);
     }
 }

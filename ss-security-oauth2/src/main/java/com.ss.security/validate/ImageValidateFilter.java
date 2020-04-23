@@ -2,11 +2,10 @@ package com.ss.security.validate;
 
 
 import cn.hutool.core.util.StrUtil;
-import com.ss.security.properties.CaptchaProperties;
 import com.ss.security.constant.SecurityConstant;
+import com.ss.security.properties.CaptchaProperties;
 import com.ss.security.util.ResponseUtil;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.util.AntPathMatcher;
@@ -57,7 +56,7 @@ public class ImageValidateFilter extends OncePerRequestFilter {
             }
             String redisCode = stringRedisTemplate.opsForValue().get(SecurityConstant.LOGIN_CAPTCHA_ID + captchaId);
             if (StrUtil.isBlank(redisCode)) {
-                ResponseUtil.out(response,500,"验证码已过期，请重新获取");
+                ResponseUtil.out(response, 500, "验证码已过期，请重新获取");
                 return;
             }
 
