@@ -1,9 +1,9 @@
-package com.ss.core.config.security;
+package com.ss.security;
 
 
 import cn.hutool.core.util.StrUtil;
-import com.ss.core.config.security.exception.LoginFailLimitException;
-import com.ss.core.config.security.service.SecurityService;
+import com.ss.security.exception.LoginFailLimitException;
+import com.ss.security.service.SecurityService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.security.core.userdetails.UserDetails;

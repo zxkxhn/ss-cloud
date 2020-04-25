@@ -1,4 +1,4 @@
-package com.ss.databases.shardingsphere;
+package com.ss.databases.config;
 
 import cn.hutool.core.io.IoUtil;
 import com.alibaba.druid.filter.Filter;

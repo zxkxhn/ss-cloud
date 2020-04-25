@@ -1,18 +1,14 @@
-package com.ss.core.config.security.jwt;
+package com.ss.security.jwt;
 
 
 import cn.hutool.core.util.StrUtil;
 import com.alibaba.fastjson.JSONObject;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-import com.ss.core.config.security.constant.SecurityConstant;
-import com.ss.core.config.security.properties.IgnoredUrlsProperties;
-import com.ss.core.config.security.properties.TokenProperties;
-import com.ss.core.exception.SystemErrorTypeEnum;
-import com.ss.core.util.ResponseUtil;
-import com.ss.core.common.Result;
-import com.ss.core.config.security.SecurityUtil;
-import com.ss.core.config.security.TokenUser;
+import com.ss.security.SecurityUtil;
+import com.ss.security.TokenUser;
+import com.ss.security.constant.SecurityConstant;
+import com.ss.security.properties.IgnoredUrlsProperties;
+import com.ss.security.properties.TokenProperties;
+import com.ss.security.util.ResponseUtil;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
@@ -103,7 +99,7 @@ public class JWTAuthenticationFilter extends BasicAuthenticationFilter {
             // redis
             String v = redisTemplate.opsForValue().get(SecurityConstant.TOKEN_PRE + header);
             if (StrUtil.isBlank(v)) {
-                ResponseUtil.out(response, Result.fail(SystemErrorTypeEnum.JWT_TOKEN_ERROR, "登录失效"));
+                ResponseUtil.out(response, 403, "登录失效");
                 return null;
             }
             TokenUser user = JSONObject.parseObject(v, TokenUser.class);
@@ -138,8 +134,7 @@ public class JWTAuthenticationFilter extends BasicAuthenticationFilter {
                     // 缓存了权限
                     String authority = claims.get(SecurityConstant.AUTHORITIES).toString();
                     if (StrUtil.isNotBlank(authority)) {
-                        List<String> list = new Gson().fromJson(authority, new TypeToken<List<String>>() {
-                        }.getType());
+                        List<String> list = JSONObject.parseArray(authority, String.class);
                         for (String ga : list) {
                             authorities.add(new SimpleGrantedAuthority(ga));
                         }
@@ -149,10 +144,10 @@ public class JWTAuthenticationFilter extends BasicAuthenticationFilter {
                     authorities = securityUtil.getCurrUserPerms(username);
                 }
             } catch (ExpiredJwtException e) {
-                ResponseUtil.out(response, ResponseUtil.resultMap(false, 401, "登录已失效，请重新登录"));
+                ResponseUtil.out(response, 401, "登录已失效，请重新登录");
             } catch (Exception e) {
                 log.error(e.toString());
-                ResponseUtil.out(response, ResponseUtil.resultMap(false, 500, "解析token错误"));
+                ResponseUtil.out(response, 500, "解析token错误");
             }
         }
 

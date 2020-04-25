@@ -1,11 +1,10 @@
-package com.ss.core.config.security.validate;
+package com.ss.security.validate;
 
 
 import cn.hutool.core.util.StrUtil;
-import com.ss.core.config.security.properties.CaptchaProperties;
-import com.ss.core.util.ResponseUtil;
-import com.ss.core.common.Result;
-import com.ss.core.config.security.constant.SecurityConstant;
+import com.ss.security.constant.SecurityConstant;
+import com.ss.security.properties.CaptchaProperties;
+import com.ss.security.util.ResponseUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.core.StringRedisTemplate;
@@ -32,8 +31,8 @@ public class ImageValidateFilter extends OncePerRequestFilter {
     @Resource
     private CaptchaProperties captchaProperties;
 
-    @Resource(name = "stringRedisTemplate")
-    private StringRedisTemplate redisTemplate;
+    @Resource
+    private StringRedisTemplate stringRedisTemplate;
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws ServletException, IOException {
@@ -52,22 +51,22 @@ public class ImageValidateFilter extends OncePerRequestFilter {
             String captchaId = request.getParameter("captchaId");
             String code = request.getParameter("code");
             if (StrUtil.isBlank(captchaId) || StrUtil.isBlank(code)) {
-                ResponseUtil.out(response, Result.fail("请传入图形验证码所需参数captchaId或code"));
+                ResponseUtil.out(response, 500, "请传入图形验证码所需参数captchaId或code");
                 return;
             }
-            String redisCode = redisTemplate.opsForValue().get(SecurityConstant.LOGIN_CAPTCHA_ID + captchaId);
+            String redisCode = stringRedisTemplate.opsForValue().get(SecurityConstant.LOGIN_CAPTCHA_ID + captchaId);
             if (StrUtil.isBlank(redisCode)) {
-                ResponseUtil.out(response, Result.fail("验证码已过期，请重新获取"));
+                ResponseUtil.out(response, 500, "验证码已过期，请重新获取");
                 return;
             }
 
             if (!redisCode.toLowerCase().equals(code.toLowerCase())) {
                 log.info("验证码错误：code:{} , redisCode:{}", code, redisCode);
-                ResponseUtil.out(response, Result.fail("图形验证码输入错误"));
+                ResponseUtil.out(response, 500, "图形验证码输入错误");
                 return;
             }
             // 已验证清除key
-            redisTemplate.delete(SecurityConstant.LOGIN_CAPTCHA_ID + captchaId);
+            stringRedisTemplate.delete(SecurityConstant.LOGIN_CAPTCHA_ID + captchaId);
             // 验证成功 放行
             chain.doFilter(request, response);
             return;

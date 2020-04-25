@@ -1,6 +1,6 @@
-package com.ss.core.config.security;
+package com.ss.security;
 
-import com.ss.core.config.security.service.SecurityService;
+import com.ss.security.service.SecurityService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Component;

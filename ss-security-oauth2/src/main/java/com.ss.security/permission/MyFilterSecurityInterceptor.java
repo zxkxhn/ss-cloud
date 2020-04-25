@@ -1,4 +1,4 @@
-package com.ss.core.config.security.permission;
+package com.ss.security.permission;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.SecurityMetadataSource;
