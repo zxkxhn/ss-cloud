@@ -11,7 +11,6 @@ import org.apache.shardingsphere.core.yaml.engine.YamlEngine;
 import org.apache.shardingsphere.core.yaml.swapper.impl.ShardingRuleConfigurationYamlSwapper;
 import org.apache.shardingsphere.shardingjdbc.api.ShardingDataSourceFactory;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;
 
 import javax.annotation.Resource;
@@ -33,7 +32,7 @@ import java.util.Map;
 
 
 @Slf4j
-@Configuration
+//@Configuration
 public class ShardingDataSourceConfig {
 
     @Resource

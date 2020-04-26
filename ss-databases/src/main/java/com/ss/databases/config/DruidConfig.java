@@ -5,7 +5,6 @@ import com.alibaba.druid.filter.stat.StatFilter;
 import com.alibaba.druid.support.http.StatViewServlet;
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 
 /**
  * druid 装配
@@ -15,7 +14,7 @@ import org.springframework.context.annotation.Configuration;
  * @Date: 2019年11月25日 13:45
  */
 
-@Configuration
+//@Configuration
 public class DruidConfig {
 
     @Bean
