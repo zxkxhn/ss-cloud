@@ -1,66 +1,66 @@
 {
   "properties": [
     {
-      "name": "spring.datasource.druid.connection-properties",
+      "name": "ss.datasource.druid.connection-properties",
       "type": "java.lang.String",
       "sourceType": "com.alibaba.druid.pool.DruidDataSource"
     },
     {
-      "name": "spring.datasource.druid.filters",
+      "name": "ss.datasource.druid.filters",
       "type": "java.lang.String",
       "sourceType": "com.alibaba.druid.pool.DruidDataSource"
     },
     {
-      "name": "spring.datasource.druid.filter.stat.enabled",
+      "name": "ss.datasource.druid.filter.stat.enabled",
       "type": "java.lang.Boolean",
       "sourceType": "com.ss.databases.druid.stat.DruidFilterConfiguration",
       "description": "Enable StatFilter.",
       "defaultValue": true
     },
     {
-      "name": "spring.datasource.druid.filter.config.enabled",
+      "name": "ss.datasource.druid.filter.config.enabled",
       "type": "java.lang.Boolean",
       "sourceType": "com.ss.databases.druid.stat.DruidFilterConfiguration",
       "description": "Enable ConfigFilter.",
       "defaultValue": false
     },
     {
-      "name": "spring.datasource.druid.filter.encoding.enabled",
+      "name": "ss.datasource.druid.filter.encoding.enabled",
       "type": "java.lang.Boolean",
       "sourceType": "com.ss.databases.druid.stat.DruidFilterConfiguration",
       "description": "Enable EncodingConvertFilter.",
       "defaultValue": false
     },
     {
-      "name": "spring.datasource.druid.filter.slf4j.enabled",
+      "name": "ss.datasource.druid.filter.slf4j.enabled",
       "type": "java.lang.Boolean",
       "sourceType": "com.ss.databases.druid.stat.DruidFilterConfiguration",
       "description": "Enable Slf4jLogFilter.",
       "defaultValue": false
     },
     {
-      "name": "spring.datasource.druid.filter.log4j.enabled",
+      "name": "ss.datasource.druid.filter.log4j.enabled",
       "type": "java.lang.Boolean",
       "sourceType": "com.ss.databases.druid.stat.DruidFilterConfiguration",
       "description": "Enable Log4jFilter.",
       "defaultValue": false
     },
     {
-      "name": "spring.datasource.druid.filter.log4j2.enabled",
+      "name": "ss.datasource.druid.filter.log4j2.enabled",
       "type": "java.lang.Boolean",
       "sourceType": "com.ss.databases.druid.stat.DruidFilterConfiguration",
       "description": "Enable Log4j2Filter.",
       "defaultValue": false
     },
     {
-      "name": "spring.datasource.druid.filter.commons-log.enabled",
+      "name": "ss.datasource.druid.filter.commons-log.enabled",
       "type": "java.lang.Boolean",
       "sourceType": "com.ss.databases.druid.stat.DruidFilterConfiguration",
       "description": "Enable CommonsLogFilter.",
       "defaultValue": false
     },
     {
-      "name": "spring.datasource.druid.filter.wall.enabled",
+      "name": "ss.datasource.druid.filter.wall.enabled",
       "type": "java.lang.Boolean",
       "sourceType": "com.ss.databases.druid.stat.DruidFilterConfiguration",
       "description": "Enable WallFilter.",
@@ -69,7 +69,7 @@
   ],
   "hints": [
     {
-      "name": "spring.datasource.druid.filter.stat.db-type",
+      "name": "ss.datasource.druid.filter.stat.db-type",
       "type": "java.lang.String",
       "values": [
         {
@@ -135,7 +135,7 @@
       ]
     },
     {
-      "name": "spring.datasource.druid.filter.wall.db-type",
+      "name": "ss.datasource.druid.filter.wall.db-type",
       "type": "java.lang.String",
       "values": [
         {
