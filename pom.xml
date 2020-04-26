@@ -24,6 +24,7 @@
         <java.version>11</java.version>
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
+        <maven.source.plugin.version>3.2.1</maven.source.plugin.version>
 
         <!-- 三方依赖引入 -->
         <ss.parent.version>1.0.0-SNAPSHOT</ss.parent.version>
@@ -71,7 +72,9 @@
     <build>
         <plugins>
             <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-source-plugin</artifactId>
+                <version>${maven.source.plugin.version}</version>
                 <configuration>
                     <attach>true</attach>
                 </configuration>

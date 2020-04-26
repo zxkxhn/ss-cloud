@@ -31,9 +31,9 @@ public class DruidStatViewServletConfiguration {
     private static final String DEFAULT_ALLOW_IP = "127.0.0.1";
 
     @Bean
-    public ServletRegistrationBean statViewServletRegistrationBean(DruidStatProperties properties) {
+    public ServletRegistrationBean<StatViewServlet> statViewServletRegistrationBean(DruidStatProperties properties) {
         DruidStatProperties.StatViewServlet config = properties.getStatViewServlet();
-        ServletRegistrationBean registrationBean = new ServletRegistrationBean();
+        ServletRegistrationBean<StatViewServlet> registrationBean = new ServletRegistrationBean<>();
         registrationBean.setServlet(new StatViewServlet());
         registrationBean.addUrlMappings(config.getUrlPattern() != null ? config.getUrlPattern() : "/druid/*");
         if (config.getAllow() != null) {
