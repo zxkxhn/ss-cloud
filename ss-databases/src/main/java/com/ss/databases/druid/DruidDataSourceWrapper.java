@@ -28,26 +28,7 @@ import java.util.List;
  * @author lihengming [89921218@qq.com]
  */
 @ConfigurationProperties("ss.datasource.druid")
-class DruidDataSourceWrapper extends DruidDataSource implements InitializingBean {
-    @Autowired
-    private DataSourceProperties basicProperties;
-
-    @Override
-    public void afterPropertiesSet() throws Exception {
-        //if not found prefix 'ss.datasource.druid' jdbc properties ,'ss.datasource' prefix jdbc properties will be used.
-        if (super.getUsername() == null) {
-            super.setUsername(basicProperties.determineUsername());
-        }
-        if (super.getPassword() == null) {
-            super.setPassword(basicProperties.determinePassword());
-        }
-        if (super.getUrl() == null) {
-            super.setUrl(basicProperties.determineUrl());
-        }
-        if (super.getDriverClassName() == null) {
-            super.setDriverClassName(basicProperties.getDriverClassName());
-        }
-    }
+class DruidDataSourceWrapper extends DruidDataSource{
 
     @Autowired(required = false)
     public void autoAddFilters(List<Filter> filters){
