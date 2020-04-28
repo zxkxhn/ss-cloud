@@ -29,9 +29,9 @@ import org.springframework.context.annotation.Bean;
 @ConditionalOnProperty(name = "ss.datasource.druid.web-stat-filter.enabled", havingValue = "true")
 public class DruidWebStatFilterConfiguration {
     @Bean
-    public FilterRegistrationBean webStatFilterRegistrationBean(DruidStatProperties properties) {
+    public FilterRegistrationBean<WebStatFilter> webStatFilterRegistrationBean(DruidStatProperties properties) {
         DruidStatProperties.WebStatFilter config = properties.getWebStatFilter();
-        FilterRegistrationBean registrationBean = new FilterRegistrationBean();
+        FilterRegistrationBean<WebStatFilter> registrationBean = new FilterRegistrationBean<>();
         WebStatFilter filter = new WebStatFilter();
         registrationBean.setFilter(filter);
         registrationBean.addUrlPatterns(config.getUrlPattern() != null ? config.getUrlPattern() : "/*");
