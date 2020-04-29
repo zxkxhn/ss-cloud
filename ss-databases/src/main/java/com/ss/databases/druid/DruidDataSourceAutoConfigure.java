@@ -22,6 +22,7 @@ import com.ss.databases.druid.stat.DruidSpringAopConfiguration;
 import com.ss.databases.druid.stat.DruidStatViewServletConfiguration;
 import com.ss.databases.druid.stat.DruidWebStatFilterConfiguration;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.AutoConfigureBefore;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
@@ -32,6 +33,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 
+import javax.annotation.Resource;
 import javax.sql.DataSource;
 
 /**
@@ -48,8 +50,8 @@ import javax.sql.DataSource;
 @Slf4j
 public class DruidDataSourceAutoConfigure {
 
-    @Bean
-    @ConditionalOnMissingBean
+//    @Bean
+//    @ConditionalOnMissingBean
     public DataSource dataSource() {
         log.info("Init DruidDataSource");
         return new DruidDataSourceWrapper();

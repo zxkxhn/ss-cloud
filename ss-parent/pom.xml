@@ -101,6 +101,16 @@
                 <artifactId>sharding-jdbc-core</artifactId>
                 <version>${shardingsphere.version}</version>
             </dependency>
+            <dependency>
+                <groupId>org.apache.shardingsphere</groupId>
+                <artifactId>sharding-core-common</artifactId>
+                <version>${shardingsphere.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.shardingsphere</groupId>
+                <artifactId>sharding-spring-boot-util</artifactId>
+                <version>${shardingsphere.version}</version>
+            </dependency>
 
             <!-- swagger 文档 -->
             <dependency>

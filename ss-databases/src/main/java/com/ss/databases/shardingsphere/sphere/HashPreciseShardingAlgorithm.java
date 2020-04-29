@@ -1,4 +1,4 @@
-package com.ss.databases.shardingsphere;
+package com.ss.databases.shardingsphere.sphere;
 
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shardingsphere.api.sharding.standard.PreciseShardingAlgorithm;

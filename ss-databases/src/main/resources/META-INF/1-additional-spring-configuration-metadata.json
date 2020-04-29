@@ -1,0 +1,416 @@
+{
+  "groups": [
+    {
+      "name": "ss.shardingsphere",
+      "type": "com.ss.databases.shardingsphere.SpringBootConfiguration"
+    },
+    {
+      "sourceType": "org.apache.shardingsphere.core.yaml.config.sharding.YamlShardingStrategyConfiguration",
+      "name": "ss.shardingsphere.sharding.default-table-strategy",
+      "type": "org.apache.shardingsphere.core.yaml.config.sharding.YamlShardingStrategyConfiguration"
+    },
+    {
+      "sourceType": "org.apache.shardingsphere.core.yaml.config.sharding.strategy.YamlComplexShardingStrategyConfiguration",
+      "name": "ss.shardingsphere.sharding.default-table-strategy.complex",
+      "type": "org.apache.shardingsphere.core.yaml.config.sharding.strategy.YamlComplexShardingStrategyConfiguration"
+    },
+    {
+      "sourceType": "org.apache.shardingsphere.core.yaml.config.sharding.strategy.YamlHintShardingStrategyConfiguration",
+      "name": "ss.shardingsphere.sharding.default-table-strategy.hint",
+      "type": "org.apache.shardingsphere.core.yaml.config.sharding.strategy.YamlHintShardingStrategyConfiguration"
+    },
+    {
+      "sourceType": "org.apache.shardingsphere.core.yaml.config.sharding.strategy.YamlInlineShardingStrategyConfiguration",
+      "name": "ss.shardingsphere.sharding.default-table-strategy.inline",
+      "type": "org.apache.shardingsphere.core.yaml.config.sharding.strategy.YamlInlineShardingStrategyConfiguration"
+    },
+    {
+      "sourceType": "org.apache.shardingsphere.core.yaml.config.sharding.strategy.YamlStandardShardingStrategyConfiguration",
+      "name": "ss.shardingsphere.sharding.default-table-strategy.standard",
+      "type": "org.apache.shardingsphere.core.yaml.config.sharding.strategy.YamlStandardShardingStrategyConfiguration"
+    },
+    {
+      "sourceType": "org.apache.shardingsphere.core.yaml.config.sharding.YamlShardingStrategyConfiguration",
+      "name": "ss.shardingsphere.sharding.default-database-strategy",
+      "type": "org.apache.shardingsphere.core.yaml.config.sharding.YamlShardingStrategyConfiguration"
+    },
+    {
+      "sourceType": "org.apache.shardingsphere.core.yaml.config.sharding.strategy.YamlComplexShardingStrategyConfiguration",
+      "name": "ss.shardingsphere.sharding.default-database-strategy.complex",
+      "type": "org.apache.shardingsphere.core.yaml.config.sharding.strategy.YamlComplexShardingStrategyConfiguration"
+    },
+    {
+      "sourceType": "org.apache.shardingsphere.core.yaml.config.sharding.strategy.YamlHintShardingStrategyConfiguration",
+      "name": "ss.shardingsphere.sharding.default-database-strategy.hint",
+      "type": "org.apache.shardingsphere.core.yaml.config.sharding.strategy.YamlHintShardingStrategyConfiguration"
+    },
+    {
+      "sourceType": "org.apache.shardingsphere.core.yaml.config.sharding.strategy.YamlInlineShardingStrategyConfiguration",
+      "name": "ss.shardingsphere.sharding.default-database-strategy.inline",
+      "type": "org.apache.shardingsphere.core.yaml.config.sharding.strategy.YamlInlineShardingStrategyConfiguration"
+    },
+    {
+      "sourceType": "org.apache.shardingsphere.core.yaml.config.sharding.strategy.YamlStandardShardingStrategyConfiguration",
+      "name": "ss.shardingsphere.sharding.default-database-strategy.standard",
+      "type": "org.apache.shardingsphere.core.yaml.config.sharding.strategy.YamlStandardShardingStrategyConfiguration"
+    }
+  ],
+  "properties": [
+    {
+      "name": "ss.datasource.druid.connection-properties",
+      "type": "java.lang.String",
+      "sourceType": "com.alibaba.druid.pool.DruidDataSource"
+    },
+    {
+      "name": "ss.datasource.druid.filters",
+      "type": "java.lang.String",
+      "sourceType": "com.alibaba.druid.pool.DruidDataSource"
+    },
+    {
+      "name": "ss.datasource.druid.filter.stat.enabled",
+      "type": "java.lang.Boolean",
+      "sourceType": "com.ss.databases.druid.stat.DruidFilterConfiguration",
+      "description": "Enable StatFilter.",
+      "defaultValue": true
+    },
+    {
+      "name": "ss.datasource.druid.filter.config.enabled",
+      "type": "java.lang.Boolean",
+      "sourceType": "com.ss.databases.druid.stat.DruidFilterConfiguration",
+      "description": "Enable ConfigFilter.",
+      "defaultValue": false
+    },
+    {
+      "name": "ss.datasource.druid.filter.encoding.enabled",
+      "type": "java.lang.Boolean",
+      "sourceType": "com.ss.databases.druid.stat.DruidFilterConfiguration",
+      "description": "Enable EncodingConvertFilter.",
+      "defaultValue": false
+    },
+    {
+      "name": "ss.datasource.druid.filter.slf4j.enabled",
+      "type": "java.lang.Boolean",
+      "sourceType": "com.ss.databases.druid.stat.DruidFilterConfiguration",
+      "description": "Enable Slf4jLogFilter.",
+      "defaultValue": false
+    },
+    {
+      "name": "ss.datasource.druid.filter.log4j.enabled",
+      "type": "java.lang.Boolean",
+      "sourceType": "com.ss.databases.druid.stat.DruidFilterConfiguration",
+      "description": "Enable Log4jFilter.",
+      "defaultValue": false
+    },
+    {
+      "name": "ss.datasource.druid.filter.log4j2.enabled",
+      "type": "java.lang.Boolean",
+      "sourceType": "com.ss.databases.druid.stat.DruidFilterConfiguration",
+      "description": "Enable Log4j2Filter.",
+      "defaultValue": false
+    },
+    {
+      "name": "ss.datasource.druid.filter.commons-log.enabled",
+      "type": "java.lang.Boolean",
+      "sourceType": "com.ss.databases.druid.stat.DruidFilterConfiguration",
+      "description": "Enable CommonsLogFilter.",
+      "defaultValue": false
+    },
+    {
+      "name": "ss.datasource.druid.filter.wall.enabled",
+      "type": "java.lang.Boolean",
+      "sourceType": "com.ss.databases.druid.stat.DruidFilterConfiguration",
+      "description": "Enable WallFilter.",
+      "defaultValue": false
+    },
+
+
+
+
+    {
+      "name": "ss.shardingsphere.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether enable shardingsphere or not.",
+      "defaultValue": true
+    },
+    {
+      "name": "ss.shardingsphere.props",
+      "type": "java.util.Properties",
+      "sourceType": "com.ss.databases.shardingsphere.common.SpringBootPropertiesConfigurationProperties",
+      "description": "Customize shardingsphere properties."
+    },
+    {
+      "name": "ss.shardingsphere.datasource.names",
+      "type": "java.lang.String",
+      "sourceType": "com.ss.databases.shardingsphere.SpringBootConfiguration"
+    },
+    {
+      "name": "ss.shardingsphere.datasource",
+      "type": "java.util.Map<java.lang.String,java.util.Map<java.lang.String,java.lang.Object>>",
+      "sourceType": "org.apache.shardingsphere.spring.boot.util.DataSourceUtil"
+    },
+    {
+      "sourceType": "org.apache.shardingsphere.core.yaml.config.sharding.YamlShardingStrategyConfiguration",
+      "name": "ss.shardingsphere.sharding.default-database-strategy.complex",
+      "type": "org.apache.shardingsphere.core.yaml.config.sharding.strategy.YamlComplexShardingStrategyConfiguration"
+    },
+    {
+      "sourceType": "org.apache.shardingsphere.core.yaml.config.sharding.strategy.YamlComplexShardingStrategyConfiguration",
+      "name": "ss.shardingsphere.sharding.default-database-strategy.complex.algorithm-class-name",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "org.apache.shardingsphere.core.yaml.config.sharding.strategy.YamlComplexShardingStrategyConfiguration",
+      "name": "ss.shardingsphere.sharding.default-database-strategy.complex.sharding-columns",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "org.apache.shardingsphere.core.yaml.config.sharding.YamlShardingStrategyConfiguration",
+      "name": "ss.shardingsphere.sharding.default-database-strategy.hint",
+      "type": "org.apache.shardingsphere.core.yaml.config.sharding.strategy.YamlHintShardingStrategyConfiguration"
+    },
+    {
+      "sourceType": "org.apache.shardingsphere.core.yaml.config.sharding.strategy.YamlHintShardingStrategyConfiguration",
+      "name": "ss.shardingsphere.sharding.default-database-strategy.hint.algorithm-class-name",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "org.apache.shardingsphere.core.yaml.config.sharding.YamlShardingStrategyConfiguration",
+      "name": "ss.shardingsphere.sharding.default-database-strategy.inline",
+      "type": "org.apache.shardingsphere.core.yaml.config.sharding.strategy.YamlInlineShardingStrategyConfiguration"
+    },
+    {
+      "sourceType": "org.apache.shardingsphere.core.yaml.config.sharding.strategy.YamlInlineShardingStrategyConfiguration",
+      "name": "ss.shardingsphere.sharding.default-database-strategy.inline.algorithm-expression",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "org.apache.shardingsphere.core.yaml.config.sharding.strategy.YamlInlineShardingStrategyConfiguration",
+      "name": "ss.shardingsphere.sharding.default-database-strategy.inline.sharding-column",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "org.apache.shardingsphere.core.yaml.config.sharding.YamlShardingStrategyConfiguration",
+      "name": "ss.shardingsphere.sharding.default-database-strategy.none",
+      "type": "org.apache.shardingsphere.core.yaml.config.sharding.strategy.YamlNoneShardingStrategyConfiguration"
+    },
+    {
+      "sourceType": "org.apache.shardingsphere.core.yaml.config.sharding.YamlShardingStrategyConfiguration",
+      "name": "ss.shardingsphere.sharding.default-database-strategy.standard",
+      "type": "org.apache.shardingsphere.core.yaml.config.sharding.strategy.YamlStandardShardingStrategyConfiguration"
+    },
+    {
+      "sourceType": "org.apache.shardingsphere.core.yaml.config.sharding.strategy.YamlStandardShardingStrategyConfiguration",
+      "name": "ss.shardingsphere.sharding.default-database-strategy.standard.precise-algorithm-class-name",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "org.apache.shardingsphere.core.yaml.config.sharding.strategy.YamlStandardShardingStrategyConfiguration",
+      "name": "ss.shardingsphere.sharding.default-database-strategy.standard.range-algorithm-class-name",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "org.apache.shardingsphere.core.yaml.config.sharding.strategy.YamlStandardShardingStrategyConfiguration",
+      "name": "ss.shardingsphere.sharding.default-database-strategy.standard.sharding-column",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "org.apache.shardingsphere.core.yaml.config.sharding.YamlShardingStrategyConfiguration",
+      "name": "ss.shardingsphere.sharding.default-table-strategy.complex",
+      "type": "org.apache.shardingsphere.core.yaml.config.sharding.strategy.YamlComplexShardingStrategyConfiguration"
+    },
+    {
+      "sourceType": "org.apache.shardingsphere.core.yaml.config.sharding.strategy.YamlComplexShardingStrategyConfiguration",
+      "name": "ss.shardingsphere.sharding.default-table-strategy.complex.algorithm-class-name",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "org.apache.shardingsphere.core.yaml.config.sharding.strategy.YamlComplexShardingStrategyConfiguration",
+      "name": "ss.shardingsphere.sharding.default-table-strategy.complex.sharding-columns",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "org.apache.shardingsphere.core.yaml.config.sharding.YamlShardingStrategyConfiguration",
+      "name": "ss.shardingsphere.sharding.default-table-strategy.hint",
+      "type": "org.apache.shardingsphere.core.yaml.config.sharding.strategy.YamlHintShardingStrategyConfiguration"
+    },
+    {
+      "sourceType": "org.apache.shardingsphere.core.yaml.config.sharding.strategy.YamlHintShardingStrategyConfiguration",
+      "name": "ss.shardingsphere.sharding.default-table-strategy.hint.algorithm-class-name",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "org.apache.shardingsphere.core.yaml.config.sharding.YamlShardingStrategyConfiguration",
+      "name": "ss.shardingsphere.sharding.default-table-strategy.inline",
+      "type": "org.apache.shardingsphere.core.yaml.config.sharding.strategy.YamlInlineShardingStrategyConfiguration"
+    },
+    {
+      "sourceType": "org.apache.shardingsphere.core.yaml.config.sharding.strategy.YamlInlineShardingStrategyConfiguration",
+      "name": "ss.shardingsphere.sharding.default-table-strategy.inline.algorithm-expression",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "org.apache.shardingsphere.core.yaml.config.sharding.strategy.YamlInlineShardingStrategyConfiguration",
+      "name": "ss.shardingsphere.sharding.default-table-strategy.inline.sharding-column",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "org.apache.shardingsphere.core.yaml.config.sharding.YamlShardingStrategyConfiguration",
+      "name": "ss.shardingsphere.sharding.default-table-strategy.none",
+      "type": "org.apache.shardingsphere.core.yaml.config.sharding.strategy.YamlNoneShardingStrategyConfiguration"
+    },
+    {
+      "sourceType": "org.apache.shardingsphere.core.yaml.config.sharding.YamlShardingStrategyConfiguration",
+      "name": "ss.shardingsphere.sharding.default-table-strategy.standard",
+      "type": "org.apache.shardingsphere.core.yaml.config.sharding.strategy.YamlStandardShardingStrategyConfiguration"
+    },
+    {
+      "sourceType": "org.apache.shardingsphere.core.yaml.config.sharding.strategy.YamlStandardShardingStrategyConfiguration",
+      "name": "ss.shardingsphere.sharding.default-table-strategy.standard.precise-algorithm-class-name",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "org.apache.shardingsphere.core.yaml.config.sharding.strategy.YamlStandardShardingStrategyConfiguration",
+      "name": "ss.shardingsphere.sharding.default-table-strategy.standard.range-algorithm-class-name",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "org.apache.shardingsphere.core.yaml.config.sharding.strategy.YamlStandardShardingStrategyConfiguration",
+      "name": "ss.shardingsphere.sharding.default-table-strategy.standard.sharding-column",
+      "type": "java.lang.String"
+    }
+  ],
+  "hints": [
+    {
+      "name": "ss.datasource.druid.filter.stat.db-type",
+      "type": "java.lang.String",
+      "values": [
+        {
+          "value": "db2"
+        },
+        {
+          "value": "postgresql"
+        },
+        {
+          "value": "sqlserver"
+        },
+        {
+          "value": "oracle"
+        },
+        {
+          "value": "AliOracle"
+        },
+        {
+          "value": "mysql"
+        },
+        {
+          "value": "mariadb"
+        },
+        {
+          "value": "hive"
+        },
+        {
+          "value": "h2"
+        },
+        {
+          "value": "dm"
+        },
+        {
+          "value": "kingbase"
+        },
+        {
+          "value": "oceanbase"
+        },
+        {
+          "value": "xugu"
+        },
+        {
+          "value": "odps"
+        },
+        {
+          "value": "teradata"
+        },
+        {
+          "value": "log4jdbc"
+        },
+        {
+          "value": "phoenix"
+        },
+        {
+          "value": "edb"
+        },
+        {
+          "value": "kylin"
+        },
+        {
+          "value": "sqlite"
+        }
+      ]
+    },
+    {
+      "name": "ss.datasource.druid.filter.wall.db-type",
+      "type": "java.lang.String",
+      "values": [
+        {
+          "value": "db2"
+        },
+        {
+          "value": "postgresql"
+        },
+        {
+          "value": "sqlserver"
+        },
+        {
+          "value": "oracle"
+        },
+        {
+          "value": "AliOracle"
+        },
+        {
+          "value": "mysql"
+        },
+        {
+          "value": "mariadb"
+        },
+        {
+          "value": "hive"
+        },
+        {
+          "value": "h2"
+        },
+        {
+          "value": "dm"
+        },
+        {
+          "value": "kingbase"
+        },
+        {
+          "value": "oceanbase"
+        },
+         {
+          "value": "xugu"
+        },
+        {
+          "value": "odps"
+        },
+        {
+          "value": "teradata"
+        },
+        {
+          "value": "log4jdbc"
+        },
+        {
+          "value": "phoenix"
+        },
+        {
+          "value": "edb"
+        },
+        {
+          "value": "kylin"
+        },
+        {
+          "value": "sqlite"
+        }
+      ]
+    }
+  ]
+}
