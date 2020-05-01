@@ -56,73 +56,6 @@
     }
   ],
   "properties": [
-    {
-      "name": "ss.datasource.druid.connection-properties",
-      "type": "java.lang.String",
-      "sourceType": "com.alibaba.druid.pool.DruidDataSource"
-    },
-    {
-      "name": "ss.datasource.druid.filters",
-      "type": "java.lang.String",
-      "sourceType": "com.alibaba.druid.pool.DruidDataSource"
-    },
-    {
-      "name": "ss.datasource.druid.filter.stat.enabled",
-      "type": "java.lang.Boolean",
-      "sourceType": "com.ss.databases.druid.stat.DruidFilterConfiguration",
-      "description": "Enable StatFilter.",
-      "defaultValue": true
-    },
-    {
-      "name": "ss.datasource.druid.filter.config.enabled",
-      "type": "java.lang.Boolean",
-      "sourceType": "com.ss.databases.druid.stat.DruidFilterConfiguration",
-      "description": "Enable ConfigFilter.",
-      "defaultValue": false
-    },
-    {
-      "name": "ss.datasource.druid.filter.encoding.enabled",
-      "type": "java.lang.Boolean",
-      "sourceType": "com.ss.databases.druid.stat.DruidFilterConfiguration",
-      "description": "Enable EncodingConvertFilter.",
-      "defaultValue": false
-    },
-    {
-      "name": "ss.datasource.druid.filter.slf4j.enabled",
-      "type": "java.lang.Boolean",
-      "sourceType": "com.ss.databases.druid.stat.DruidFilterConfiguration",
-      "description": "Enable Slf4jLogFilter.",
-      "defaultValue": false
-    },
-    {
-      "name": "ss.datasource.druid.filter.log4j.enabled",
-      "type": "java.lang.Boolean",
-      "sourceType": "com.ss.databases.druid.stat.DruidFilterConfiguration",
-      "description": "Enable Log4jFilter.",
-      "defaultValue": false
-    },
-    {
-      "name": "ss.datasource.druid.filter.log4j2.enabled",
-      "type": "java.lang.Boolean",
-      "sourceType": "com.ss.databases.druid.stat.DruidFilterConfiguration",
-      "description": "Enable Log4j2Filter.",
-      "defaultValue": false
-    },
-    {
-      "name": "ss.datasource.druid.filter.commons-log.enabled",
-      "type": "java.lang.Boolean",
-      "sourceType": "com.ss.databases.druid.stat.DruidFilterConfiguration",
-      "description": "Enable CommonsLogFilter.",
-      "defaultValue": false
-    },
-    {
-      "name": "ss.datasource.druid.filter.wall.enabled",
-      "type": "java.lang.Boolean",
-      "sourceType": "com.ss.databases.druid.stat.DruidFilterConfiguration",
-      "description": "Enable WallFilter.",
-      "defaultValue": false
-    },
-
 
 
 
@@ -139,15 +72,16 @@
       "description": "Customize shardingsphere properties."
     },
     {
-      "name": "ss.shardingsphere.datasource.names",
+      "name": "ss.datasource.names",
       "type": "java.lang.String",
       "sourceType": "com.ss.databases.shardingsphere.SpringBootConfiguration"
     },
     {
-      "name": "ss.shardingsphere.datasource",
+      "name": "ss.datasource",
       "type": "java.util.Map<java.lang.String,java.util.Map<java.lang.String,java.lang.Object>>",
       "sourceType": "org.apache.shardingsphere.spring.boot.util.DataSourceUtil"
     },
+
     {
       "sourceType": "org.apache.shardingsphere.core.yaml.config.sharding.YamlShardingStrategyConfiguration",
       "name": "ss.shardingsphere.sharding.default-database-strategy.complex",

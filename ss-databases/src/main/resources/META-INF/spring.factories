@@ -1,2 +1,2 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-com.ss.databases.demo.DemoConfiguration
+com.ss.databases.shardingsphere.SpringBootConfiguration
