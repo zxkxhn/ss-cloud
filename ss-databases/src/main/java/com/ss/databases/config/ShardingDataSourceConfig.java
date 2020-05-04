@@ -7,9 +7,9 @@ import com.alibaba.druid.wall.WallConfig;
 import com.alibaba.druid.wall.WallFilter;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shardingsphere.core.yaml.config.sharding.YamlRootShardingConfiguration;
-import org.apache.shardingsphere.core.yaml.engine.YamlEngine;
-import org.apache.shardingsphere.core.yaml.swapper.impl.ShardingRuleConfigurationYamlSwapper;
+import org.apache.shardingsphere.core.yaml.swapper.ShardingRuleConfigurationYamlSwapper;
 import org.apache.shardingsphere.shardingjdbc.api.ShardingDataSourceFactory;
+import org.apache.shardingsphere.underlying.common.yaml.engine.YamlEngine;
 import org.springframework.context.annotation.Bean;
 import org.springframework.core.io.ClassPathResource;
 

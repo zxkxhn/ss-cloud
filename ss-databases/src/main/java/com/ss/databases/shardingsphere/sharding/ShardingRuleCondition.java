@@ -17,9 +17,9 @@
 
 package com.ss.databases.shardingsphere.sharding;
 
-import org.apache.shardingsphere.shardingjdbc.spring.boot.encrypt.EncryptRuleCondition;
-import org.apache.shardingsphere.shardingjdbc.spring.boot.masterslave.MasterSlaveRuleCondition;
-import org.apache.shardingsphere.shardingjdbc.spring.boot.shadow.ShadowRuleCondition;
+import com.ss.databases.shardingsphere.encrypt.EncryptRuleCondition;
+import com.ss.databases.shardingsphere.masterslave.MasterSlaveRuleCondition;
+import com.ss.databases.shardingsphere.shadow.ShadowRuleCondition;
 import org.springframework.boot.autoconfigure.condition.ConditionOutcome;
 import org.springframework.boot.autoconfigure.condition.SpringBootCondition;
 import org.springframework.context.annotation.ConditionContext;
