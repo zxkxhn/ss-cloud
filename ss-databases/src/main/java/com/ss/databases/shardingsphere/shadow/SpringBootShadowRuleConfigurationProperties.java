@@ -15,14 +15,14 @@
  * limitations under the License.
  */
 
-package com.ss.databases.shardingsphere.encrypt;
+package com.ss.databases.shardingsphere.shadow;
 
-import org.apache.shardingsphere.encrypt.yaml.config.YamlEncryptRuleConfiguration;
+import org.apache.shardingsphere.core.yaml.config.shadow.YamlShadowRuleConfiguration;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 /**
- * Encrypt rule configuration properties.
+ * Shadow rule configuration properties.
  */
-@ConfigurationProperties(prefix = "ss.shardingsphere.encrypt")
-public class SpringBootEncryptRuleConfigurationProperties extends YamlEncryptRuleConfiguration {
+@ConfigurationProperties(prefix = "ss.shardingsphere.shadow", ignoreInvalidFields = true)
+public class SpringBootShadowRuleConfigurationProperties extends YamlShadowRuleConfiguration {
 }

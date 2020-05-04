@@ -15,26 +15,24 @@
  * limitations under the License.
  */
 
-package com.ss.databases.shardingsphere.sharding;
+package com.ss.databases.shardingsphere.shadow;
 
-import org.apache.shardingsphere.shardingjdbc.spring.boot.encrypt.EncryptRuleCondition;
-import org.apache.shardingsphere.shardingjdbc.spring.boot.masterslave.MasterSlaveRuleCondition;
-import org.apache.shardingsphere.shardingjdbc.spring.boot.shadow.ShadowRuleCondition;
+import org.apache.shardingsphere.spring.boot.util.PropertyUtil;
 import org.springframework.boot.autoconfigure.condition.ConditionOutcome;
 import org.springframework.boot.autoconfigure.condition.SpringBootCondition;
 import org.springframework.context.annotation.ConditionContext;
 import org.springframework.core.type.AnnotatedTypeMetadata;
 
 /**
- * Sharding rule condition.
+ * Local shadow rule condition.
  */
-public final class ShardingRuleCondition extends SpringBootCondition {
+public final class ShadowRuleCondition extends SpringBootCondition {
+    
+    private static final String SHADOW_PREFIX = "ss.shardingsphere.shadow";
     
     @Override
     public ConditionOutcome getMatchOutcome(final ConditionContext conditionContext, final AnnotatedTypeMetadata annotatedTypeMetadata) {
-        boolean isMasterSlaveRule = new MasterSlaveRuleCondition().getMatchOutcome(conditionContext, annotatedTypeMetadata).isMatch();
-        boolean isEncryptRule = new EncryptRuleCondition().getMatchOutcome(conditionContext, annotatedTypeMetadata).isMatch();
-        boolean isShadow = new ShadowRuleCondition().getMatchOutcome(conditionContext, annotatedTypeMetadata).isMatch();
-        return isMasterSlaveRule || isEncryptRule || isShadow ? ConditionOutcome.noMatch("Have found master-slave or encrypt rule in environment") : ConditionOutcome.match();
+        boolean isShadow = PropertyUtil.containPropertyPrefix(conditionContext.getEnvironment(), SHADOW_PREFIX);
+        return isShadow ? ConditionOutcome.match() : ConditionOutcome.noMatch("Can't find ShardingSphere shadow rule configuration in environment.");
     }
 }

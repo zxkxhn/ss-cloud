@@ -25,10 +25,8 @@ import java.util.Properties;
 
 /**
  * Properties configuration properties.
- *
- * @author zhangliang
  */
-@ConfigurationProperties(prefix = "ss.shardingsphere")
+@ConfigurationProperties(prefix = "spring.shardingsphere")
 @Getter
 @Setter
 public class SpringBootPropertiesConfigurationProperties {
