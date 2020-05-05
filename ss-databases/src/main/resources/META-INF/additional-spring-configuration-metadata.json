@@ -1,7 +1,7 @@
 {
   "groups": [
     {
-      "name": "ss.shardingsphere",
+      "name": "ss.datasource",
       "type": "com.ss.databases.shardingsphere.SpringBootConfiguration"
     },
     {
@@ -56,9 +56,6 @@
     }
   ],
   "properties": [
-
-
-
     {
       "name": "ss.shardingsphere.enabled",
       "type": "java.lang.Boolean",
@@ -81,7 +78,6 @@
       "type": "java.util.Map<java.lang.String,java.util.Map<java.lang.String,java.lang.Object>>",
       "sourceType": "org.apache.shardingsphere.spring.boot.util.DataSourceUtil"
     },
-
     {
       "sourceType": "org.apache.shardingsphere.core.yaml.config.sharding.YamlShardingStrategyConfiguration",
       "name": "ss.shardingsphere.sharding.default-database-strategy.complex",
@@ -215,134 +211,16 @@
   ],
   "hints": [
     {
-      "name": "ss.datasource.druid.filter.stat.db-type",
-      "type": "java.lang.String",
-      "values": [
-        {
-          "value": "db2"
-        },
-        {
-          "value": "postgresql"
-        },
-        {
-          "value": "sqlserver"
-        },
-        {
-          "value": "oracle"
-        },
-        {
-          "value": "AliOracle"
-        },
-        {
-          "value": "mysql"
-        },
-        {
-          "value": "mariadb"
-        },
-        {
-          "value": "hive"
-        },
-        {
-          "value": "h2"
-        },
-        {
-          "value": "dm"
-        },
-        {
-          "value": "kingbase"
-        },
-        {
-          "value": "oceanbase"
-        },
-        {
-          "value": "xugu"
-        },
-        {
-          "value": "odps"
-        },
-        {
-          "value": "teradata"
-        },
-        {
-          "value": "log4jdbc"
-        },
-        {
-          "value": "phoenix"
-        },
-        {
-          "value": "edb"
-        },
-        {
-          "value": "kylin"
-        },
-        {
-          "value": "sqlite"
-        }
-      ]
+      "name": "ss.shardingsphere.datasource.keys",
+      "values": []
     },
     {
-      "name": "ss.datasource.druid.filter.wall.db-type",
-      "type": "java.lang.String",
+      "name": "ss.shardingsphere.datasource.values",
       "values": [
+      ],
+      "providers": [
         {
-          "value": "db2"
-        },
-        {
-          "value": "postgresql"
-        },
-        {
-          "value": "sqlserver"
-        },
-        {
-          "value": "oracle"
-        },
-        {
-          "value": "AliOracle"
-        },
-        {
-          "value": "mysql"
-        },
-        {
-          "value": "mariadb"
-        },
-        {
-          "value": "hive"
-        },
-        {
-          "value": "h2"
-        },
-        {
-          "value": "dm"
-        },
-        {
-          "value": "kingbase"
-        },
-        {
-          "value": "oceanbase"
-        },
-         {
-          "value": "xugu"
-        },
-        {
-          "value": "odps"
-        },
-        {
-          "value": "teradata"
-        },
-        {
-          "value": "log4jdbc"
-        },
-        {
-          "value": "phoenix"
-        },
-        {
-          "value": "edb"
-        },
-        {
-          "value": "kylin"
-        },
-        {
-          "value": "sqlite"
+          "name": "any"
         }
       ]
     }
