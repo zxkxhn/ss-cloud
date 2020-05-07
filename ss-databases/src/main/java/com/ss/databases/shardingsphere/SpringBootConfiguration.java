@@ -19,6 +19,8 @@ package com.ss.databases.shardingsphere;
 
 import com.google.common.base.Preconditions;
 import com.ss.databases.shardingsphere.common.SpringBootPropertiesConfigurationProperties;
+import com.ss.databases.shardingsphere.datasource.YamlDataSourceConfiguration;
+import com.ss.databases.shardingsphere.datasource.druid.SpringBootDruidDatasourceConfigurationProperties;
 import com.ss.databases.shardingsphere.encrypt.EncryptRuleCondition;
 import com.ss.databases.shardingsphere.encrypt.SpringBootEncryptRuleConfigurationProperties;
 import com.ss.databases.shardingsphere.masterslave.MasterSlaveRuleCondition;
@@ -45,7 +47,9 @@ import org.apache.shardingsphere.underlying.common.exception.ShardingSphereExcep
 import org.springframework.boot.autoconfigure.AutoConfigureBefore;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
+import org.springframework.boot.configurationprocessor.json.JSONObject;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.boot.json.JacksonJsonParser;
 import org.springframework.context.EnvironmentAware;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -58,10 +62,7 @@ import org.springframework.jndi.JndiObjectFactoryBean;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 import java.sql.SQLException;
-import java.util.Collections;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Spring boot starter configuration.
@@ -71,8 +72,9 @@ import java.util.Map;
 @EnableConfigurationProperties({
         SpringBootShardingRuleConfigurationProperties.class,
         SpringBootMasterSlaveRuleConfigurationProperties.class, SpringBootEncryptRuleConfigurationProperties.class,
-        SpringBootPropertiesConfigurationProperties.class, SpringBootShadowRuleConfigurationProperties.class})
-@ConditionalOnProperty(prefix = "ss.datasource", name = "enabled", havingValue = "true", matchIfMissing = true)
+        SpringBootPropertiesConfigurationProperties.class, SpringBootShadowRuleConfigurationProperties.class,
+        SpringBootDruidDatasourceConfigurationProperties.class
+})
 @AutoConfigureBefore(DataSourceAutoConfiguration.class)
 @RequiredArgsConstructor
 public class SpringBootConfiguration implements EnvironmentAware {
@@ -88,6 +90,8 @@ public class SpringBootConfiguration implements EnvironmentAware {
     private final SpringBootPropertiesConfigurationProperties props;
 
     private final Map<String, DataSource> dataSourceMap = new LinkedHashMap<>();
+
+    private final SpringBootDruidDatasourceConfigurationProperties druidDatasource;
 
     private final String jndiName = "jndi-name";
 
@@ -152,15 +156,27 @@ public class SpringBootConfiguration implements EnvironmentAware {
     @Override
     public final void setEnvironment(final Environment environment) {
         String prefix = "ss.datasource.";
-        for (String each : getDataSourceNames(environment, prefix)) {
+//        for (String each : getDataSourceNames(environment, prefix)) {
+//            try {
+//                dataSourceMap.put(each, getDataSource(environment, prefix, each));
+//            } catch (final ReflectiveOperationException ex) {
+//                throw new ShardingSphereException("Can't find datasource type!", ex);
+//            } catch (final NamingException namingEx) {
+//                throw new ShardingSphereException("Can't find JNDI datasource!", namingEx);
+//            }
+//        }
+        Map<String, YamlDataSourceConfiguration> dataSourceConfigurationMap = druidDatasource.getDatasource();
+        dataSourceConfigurationMap.forEach((k, v) -> {
             try {
-                dataSourceMap.put(each, getDataSource(environment, prefix, each));
+                dataSourceMap.put(k, getDataSource(environment,prefix,k,v));
             } catch (final ReflectiveOperationException ex) {
                 throw new ShardingSphereException("Can't find datasource type!", ex);
             } catch (final NamingException namingEx) {
                 throw new ShardingSphereException("Can't find JNDI datasource!", namingEx);
             }
-        }
+
+        });
+
     }
 
     private List<String> getDataSourceNames(final Environment environment, final String prefix) {
@@ -171,16 +187,33 @@ public class SpringBootConfiguration implements EnvironmentAware {
     }
 
     @SuppressWarnings("unchecked")
+    private DataSource getDataSource(Environment environment, String prefix, String dataSourceName, YamlDataSourceConfiguration yamlDataSourceConfiguration) throws ReflectiveOperationException, NamingException {
+        if (yamlDataSourceConfiguration.getJndiName() != null) {
+            return getJndiDataSource(yamlDataSourceConfiguration.getJndiName());
+        }
+        Map<String, Object> dataSourceProps = yamlDataSourceConfiguration.toMap();
+        DataSource result = DataSourceUtil.getDataSource(yamlDataSourceConfiguration.getType().getName(), dataSourceProps);
+        DataSourcePropertiesSetterHolder.getDataSourcePropertiesSetterByType(dataSourceProps.get("type").toString()).ifPresent(
+                dataSourcePropertiesSetter -> dataSourcePropertiesSetter.propertiesSet(environment, prefix, dataSourceName, result));
+        return result;
+    }
+
+    @SuppressWarnings("unchecked")
     private DataSource getDataSource(final Environment environment, final String prefix, final String dataSourceName) throws ReflectiveOperationException, NamingException {
         Map<String, Object> dataSourceProps = PropertyUtil.handle(environment, prefix + dataSourceName.trim(), Map.class);
         Preconditions.checkState(!dataSourceProps.isEmpty(), "Wrong datasource properties!");
         if (dataSourceProps.containsKey(jndiName)) {
             return getJndiDataSource(dataSourceProps.get(jndiName).toString());
         }
+
         DataSource result = DataSourceUtil.getDataSource(dataSourceProps.get("type").toString(), dataSourceProps);
         DataSourcePropertiesSetterHolder.getDataSourcePropertiesSetterByType(dataSourceProps.get("type").toString()).ifPresent(
                 dataSourcePropertiesSetter -> dataSourcePropertiesSetter.propertiesSet(environment, prefix, dataSourceName, result));
         return result;
+    }
+
+    private DataSource getOtherDataSource(){
+        return null;
     }
 
     private DataSource getJndiDataSource(final String jndiName) throws NamingException {
