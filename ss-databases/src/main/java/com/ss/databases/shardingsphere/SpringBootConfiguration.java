@@ -20,6 +20,8 @@ package com.ss.databases.shardingsphere;
 import com.google.common.base.Preconditions;
 import com.ss.databases.shardingsphere.common.SpringBootPropertiesConfigurationProperties;
 import com.ss.databases.shardingsphere.datasource.YamlDataSourceConfiguration;
+import com.ss.databases.shardingsphere.datasource.druid.DruidStatViewServletConfiguration;
+import com.ss.databases.shardingsphere.datasource.druid.SpringBootDruidConfigurationProperties;
 import com.ss.databases.shardingsphere.datasource.druid.SpringBootDruidDatasourceConfigurationProperties;
 import com.ss.databases.shardingsphere.encrypt.EncryptRuleCondition;
 import com.ss.databases.shardingsphere.encrypt.SpringBootEncryptRuleConfigurationProperties;
@@ -51,10 +53,7 @@ import org.springframework.boot.configurationprocessor.json.JSONObject;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.boot.json.JacksonJsonParser;
 import org.springframework.context.EnvironmentAware;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Conditional;
-import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.*;
 import org.springframework.core.env.Environment;
 import org.springframework.core.env.StandardEnvironment;
 import org.springframework.jndi.JndiObjectFactoryBean;
@@ -73,8 +72,9 @@ import java.util.*;
         SpringBootShardingRuleConfigurationProperties.class,
         SpringBootMasterSlaveRuleConfigurationProperties.class, SpringBootEncryptRuleConfigurationProperties.class,
         SpringBootPropertiesConfigurationProperties.class, SpringBootShadowRuleConfigurationProperties.class,
-        SpringBootDruidDatasourceConfigurationProperties.class
+        SpringBootDruidDatasourceConfigurationProperties.class, SpringBootDruidConfigurationProperties.class
 })
+@Import({DruidStatViewServletConfiguration.class})
 @AutoConfigureBefore(DataSourceAutoConfiguration.class)
 @RequiredArgsConstructor
 public class SpringBootConfiguration implements EnvironmentAware {
@@ -92,6 +92,8 @@ public class SpringBootConfiguration implements EnvironmentAware {
     private final Map<String, DataSource> dataSourceMap = new LinkedHashMap<>();
 
     private final SpringBootDruidDatasourceConfigurationProperties druidDatasource;
+
+    private final SpringBootDruidConfigurationProperties druidConfig;
 
     private final String jndiName = "jndi-name";
 

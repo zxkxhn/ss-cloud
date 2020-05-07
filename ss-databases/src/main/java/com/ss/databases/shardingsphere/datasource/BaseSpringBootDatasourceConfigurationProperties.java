@@ -17,7 +17,6 @@
 
 package com.ss.databases.shardingsphere.datasource;
 
-import com.ss.databases.shardingsphere.datasource.druid.YamlDruidDataSourceConfiguration;
 import lombok.Getter;
 import lombok.Setter;
 import org.apache.shardingsphere.underlying.common.yaml.config.YamlConfiguration;
@@ -34,5 +33,6 @@ import java.util.Map;
 public class BaseSpringBootDatasourceConfigurationProperties implements YamlConfiguration {
 
     Map<String, YamlDataSourceConfiguration> datasource = new LinkedHashMap<>();
+
 
 }

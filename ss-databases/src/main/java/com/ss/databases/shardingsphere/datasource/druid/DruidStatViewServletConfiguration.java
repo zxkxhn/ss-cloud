@@ -15,40 +15,52 @@
  */
 package com.ss.databases.shardingsphere.datasource.druid;
 
+import com.alibaba.druid.support.http.StatViewServlet;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.boot.web.servlet.ServletRegistrationBean;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
 
 /**
  * @author lihengming [89921218@qq.com]
  */
 @ConditionalOnWebApplication
-@ConditionalOnProperty(name = "ss.datasource.druid.stat-view-servlet.enabled", havingValue = "true")
+@ConditionalOnProperty(name = "ss.druid-cfg.stat-view-servlet.enabled", havingValue = "true")
 public class DruidStatViewServletConfiguration {
-//    private static final String DEFAULT_ALLOW_IP = "127.0.0.1";
-//
-//    @Bean
-//    public ServletRegistrationBean<StatViewServlet> statViewServletRegistrationBean(DruidStatProperties properties) {
-//        DruidStatProperties.StatViewServlet config = properties.getStatViewServlet();
-//        ServletRegistrationBean<StatViewServlet> registrationBean = new ServletRegistrationBean<>();
-//        registrationBean.setServlet(new StatViewServlet());
-//        registrationBean.addUrlMappings(config.getUrlPattern() != null ? config.getUrlPattern() : "/druid/*");
-//        if (config.getAllow() != null) {
-//            registrationBean.addInitParameter("allow", config.getAllow());
-//        } else {
-//            registrationBean.addInitParameter("allow", DEFAULT_ALLOW_IP);
-//        }
-//        if (config.getDeny() != null) {
-//            registrationBean.addInitParameter("deny", config.getDeny());
-//        }
-//        if (config.getLoginUsername() != null) {
-//            registrationBean.addInitParameter("loginUsername", config.getLoginUsername());
-//        }
-//        if (config.getLoginPassword() != null) {
-//            registrationBean.addInitParameter("loginPassword", config.getLoginPassword());
-//        }
-//        if (config.getResetEnable() != null) {
-//            registrationBean.addInitParameter("resetEnable", config.getResetEnable());
-//        }
-//        return registrationBean;
-//    }
+
+    @Autowired
+    private SpringBootDruidConfigurationProperties druidConfigurationProperties;
+
+
+    private static final String DEFAULT_ALLOW_IP = "127.0.0.1";
+
+    @Bean
+    public ServletRegistrationBean<StatViewServlet> statViewServletRegistrationBean() {
+         YamlDruidStatViewServlet properties = druidConfigurationProperties.getStatViewServlet();
+        ServletRegistrationBean<StatViewServlet> registrationBean = new ServletRegistrationBean<>();
+        registrationBean.setServlet(new StatViewServlet());
+        registrationBean.addUrlMappings(properties.getUrlPattern() != null ? properties.getUrlPattern() : "/druid/*");
+        if (properties.getAllow() != null) {
+            registrationBean.addInitParameter("allow", properties.getAllow());
+        } else {
+            registrationBean.addInitParameter("allow", DEFAULT_ALLOW_IP);
+        }
+        if (properties.getDeny() != null) {
+            registrationBean.addInitParameter("deny", properties.getDeny());
+        }
+        if (properties.getLoginUsername() != null) {
+            registrationBean.addInitParameter("loginUsername", properties.getLoginUsername());
+        }
+        if (properties.getLoginPassword() != null) {
+            registrationBean.addInitParameter("loginPassword", properties.getLoginPassword());
+        }
+        if (properties.getResetEnable() != null) {
+            registrationBean.addInitParameter("resetEnable", properties.getResetEnable());
+        }
+        return registrationBean;
+    }
 }

@@ -7,30 +7,15 @@
     },
     {
       "name": "ss.druid-cfg",
-      "type": "com.ss.databases.shardingsphere.datasource.druid.SpringBootDruidDatasourceConfigurationProperties",
-      "sourceType": "com.ss.databases.shardingsphere.datasource.druid.SpringBootDruidDatasourceConfigurationProperties"
+      "type": "com.ss.databases.shardingsphere.datasource.druid.YamlDruidConfiguration",
+      "sourceType": "com.ss.databases.shardingsphere.datasource.druid.SpringBootDruidConfigurationProperties"
     }
   ],
   "properties": [
     {
-      "name": "ss.datasource.type",
-      "type": "java.util.Map<java.lang.String,com.ss.databases.shardingsphere.datasource.YamlDataSourceConfiguration>",
-      "sourceType": "com.ss.databases.shardingsphere.datasource.druid.SpringBootDruidDatasourceConfigurationProperties"
-    },
-    {
-      "name": "ss.datasource.driver-class-name",
-      "type": "java.util.Map<java.lang.String,com.ss.databases.shardingsphere.datasource.YamlDataSourceConfiguration>",
-      "sourceType": "com.ss.databases.shardingsphere.datasource.druid.SpringBootDruidDatasourceConfigurationProperties"
-    },
-    {
-      "name": "ss.datasource.url",
-      "type": "java.util.Map<java.lang.String,com.ss.databases.shardingsphere.datasource.YamlDataSourceConfiguration>",
-      "sourceType": "com.ss.databases.shardingsphere.datasource.druid.SpringBootDruidDatasourceConfigurationProperties"
-    },
-    {
-      "name": "ss.datasource.password",
-      "type": "java.util.Map<java.lang.String,com.ss.databases.shardingsphere.datasource.YamlDataSourceConfiguration>",
-      "sourceType": "com.ss.databases.shardingsphere.datasource.druid.SpringBootDruidDatasourceConfigurationProperties"
+      "name": "ss.druid-cfg.",
+      "type": "com.ss.databases.shardingsphere.datasource.druid.YamlDruidConfiguration",
+      "sourceType": "com.ss.databases.shardingsphere.datasource.druid.SpringBootDruidConfigurationProperties"
     }
   ],
   "hints": [
