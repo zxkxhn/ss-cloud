@@ -17,12 +17,12 @@
 
 package com.ss.databases.shardingsphere;
 
+import com.alibaba.druid.pool.DruidDataSource;
+import com.alibaba.druid.support.http.StatViewServlet;
 import com.google.common.base.Preconditions;
 import com.ss.databases.shardingsphere.common.SpringBootPropertiesConfigurationProperties;
 import com.ss.databases.shardingsphere.datasource.YamlDataSourceConfiguration;
-import com.ss.databases.shardingsphere.datasource.druid.DruidStatViewServletConfiguration;
-import com.ss.databases.shardingsphere.datasource.druid.SpringBootDruidConfigurationProperties;
-import com.ss.databases.shardingsphere.datasource.druid.SpringBootDruidDatasourceConfigurationProperties;
+import com.ss.databases.shardingsphere.datasource.druid.*;
 import com.ss.databases.shardingsphere.encrypt.EncryptRuleCondition;
 import com.ss.databases.shardingsphere.encrypt.SpringBootEncryptRuleConfigurationProperties;
 import com.ss.databases.shardingsphere.masterslave.MasterSlaveRuleCondition;
@@ -46,12 +46,15 @@ import org.apache.shardingsphere.spring.boot.util.PropertyUtil;
 import org.apache.shardingsphere.transaction.spring.ShardingTransactionTypeScanner;
 import org.apache.shardingsphere.underlying.common.config.inline.InlineExpressionParser;
 import org.apache.shardingsphere.underlying.common.exception.ShardingSphereException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.AutoConfigureBefore;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.boot.configurationprocessor.json.JSONObject;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.boot.json.JacksonJsonParser;
+import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.context.EnvironmentAware;
 import org.springframework.context.annotation.*;
 import org.springframework.core.env.Environment;
@@ -72,9 +75,13 @@ import java.util.*;
         SpringBootShardingRuleConfigurationProperties.class,
         SpringBootMasterSlaveRuleConfigurationProperties.class, SpringBootEncryptRuleConfigurationProperties.class,
         SpringBootPropertiesConfigurationProperties.class, SpringBootShadowRuleConfigurationProperties.class,
-        SpringBootDruidDatasourceConfigurationProperties.class, SpringBootDruidConfigurationProperties.class
+        SpringBootDruidDatasourceConfigurationProperties.class, SpringBootDruidConfigurationProperties.class,
+
+
 })
-@Import({DruidStatViewServletConfiguration.class})
+//@Import({
+//        DruidStatViewServletConfiguration.class,DruidFilterConfiguration.class
+//})
 @AutoConfigureBefore(DataSourceAutoConfiguration.class)
 @RequiredArgsConstructor
 public class SpringBootConfiguration implements EnvironmentAware {
@@ -94,6 +101,7 @@ public class SpringBootConfiguration implements EnvironmentAware {
     private final SpringBootDruidDatasourceConfigurationProperties druidDatasource;
 
     private final SpringBootDruidConfigurationProperties druidConfig;
+
 
     private final String jndiName = "jndi-name";
 
@@ -155,6 +163,37 @@ public class SpringBootConfiguration implements EnvironmentAware {
         return new ShardingTransactionTypeScanner();
     }
 
+    private static final String DEFAULT_ALLOW_IP = "127.0.0.1";
+
+    // 开启 druid 监控
+    @Bean
+    @ConditionalOnWebApplication
+    @ConditionalOnProperty(name = "ss.druid-cfg.stat-view-servlet.enabled", havingValue = "true")
+    public ServletRegistrationBean<StatViewServlet> statViewServletRegistrationBean() {
+        YamlDruidStatViewServlet properties = druidConfig.getStatViewServlet();
+        ServletRegistrationBean<StatViewServlet> registrationBean = new ServletRegistrationBean<>();
+        registrationBean.setServlet(new StatViewServlet());
+        registrationBean.addUrlMappings(properties.getUrlPattern() != null ? properties.getUrlPattern() : "/druid/*");
+        if (properties.getAllow() != null) {
+            registrationBean.addInitParameter("allow", properties.getAllow());
+        } else {
+            registrationBean.addInitParameter("allow", DEFAULT_ALLOW_IP);
+        }
+        if (properties.getDeny() != null) {
+            registrationBean.addInitParameter("deny", properties.getDeny());
+        }
+        if (properties.getLoginUsername() != null) {
+            registrationBean.addInitParameter("loginUsername", properties.getLoginUsername());
+        }
+        if (properties.getLoginPassword() != null) {
+            registrationBean.addInitParameter("loginPassword", properties.getLoginPassword());
+        }
+        if (properties.getResetEnable() != null) {
+            registrationBean.addInitParameter("resetEnable", properties.getResetEnable());
+        }
+        return registrationBean;
+    }
+
     @Override
     public final void setEnvironment(final Environment environment) {
         String prefix = "ss.datasource.";
@@ -195,6 +234,7 @@ public class SpringBootConfiguration implements EnvironmentAware {
         }
         Map<String, Object> dataSourceProps = yamlDataSourceConfiguration.toMap();
         DataSource result = DataSourceUtil.getDataSource(yamlDataSourceConfiguration.getType().getName(), dataSourceProps);
+
         DataSourcePropertiesSetterHolder.getDataSourcePropertiesSetterByType(dataSourceProps.get("type").toString()).ifPresent(
                 dataSourcePropertiesSetter -> dataSourcePropertiesSetter.propertiesSet(environment, prefix, dataSourceName, result));
         return result;

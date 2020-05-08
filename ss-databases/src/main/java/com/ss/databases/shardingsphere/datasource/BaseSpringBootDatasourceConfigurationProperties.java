@@ -34,5 +34,4 @@ public class BaseSpringBootDatasourceConfigurationProperties implements YamlConf
 
     Map<String, YamlDataSourceConfiguration> datasource = new LinkedHashMap<>();
 
-
 }

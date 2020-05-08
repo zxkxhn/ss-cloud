@@ -33,8 +33,8 @@ import javax.annotation.Resource;
  * @author Exrickx
  */
 @Slf4j
-@Configuration
-@EnableGlobalMethodSecurity(prePostEnabled = true)
+//@Configuration
+//@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Resource
@@ -81,6 +81,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         // 不用过滤的地址
         ignoredUrlsProperties.getUrls().add("/index.html");
         ignoredUrlsProperties.getUrls().add("/");
+        ignoredUrlsProperties.getUrls().add("/**/**");
         // 除配置文件忽略路径其它所有请求都需经过认证和授权
         for (String url : ignoredUrlsProperties.getUrls()) {
             registry.antMatchers(url).permitAll();

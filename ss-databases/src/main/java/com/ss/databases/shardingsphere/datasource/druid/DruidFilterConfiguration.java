@@ -109,14 +109,14 @@ public class DruidFilterConfiguration {
     }
 
 
-    private static final String FILTER_STAT_PREFIX = "ss.datasource.druid-cfg.filter.stat";
-    private static final String FILTER_CONFIG_PREFIX = "ss.datasource.druid-cfg.filter.config";
-    private static final String FILTER_ENCODING_PREFIX = "ss.datasource.druid-cfg.filter.encoding";
-    private static final String FILTER_SLF4J_PREFIX = "ss.datasource.druid-cfg.filter.slf4j";
-    private static final String FILTER_LOG4J_PREFIX = "ss.datasource.druid-cfg.filter.log4j";
-    private static final String FILTER_LOG4J2_PREFIX = "ss.datasource.druid-cfg.filter.log4j2";
-    private static final String FILTER_COMMONS_LOG_PREFIX = "ss.datasource.druid-cfg.filter.commons-log";
-    private static final String FILTER_WALL_PREFIX = "ss.datasource.druid-cfg.filter.wall";
+    private static final String FILTER_STAT_PREFIX = "ss.druid-cfg.filter.stat";
+    private static final String FILTER_CONFIG_PREFIX = "ss.druid-cfg.filter.config";
+    private static final String FILTER_ENCODING_PREFIX = "ss.druid-cfg.filter.encoding";
+    private static final String FILTER_SLF4J_PREFIX = "ss.druid-cfg.filter.slf4j";
+    private static final String FILTER_LOG4J_PREFIX = "ss.druid-cfg.filter.log4j";
+    private static final String FILTER_LOG4J2_PREFIX = "ss.druid-cfg.filter.log4j2";
+    private static final String FILTER_COMMONS_LOG_PREFIX = "ss.druid-cfg.filter.commons-log";
+    private static final String FILTER_WALL_PREFIX = "ss.druid-cfg.filter.wall";
     private static final String FILTER_WALL_CONFIG_PREFIX = FILTER_WALL_PREFIX + ".config";
 
 

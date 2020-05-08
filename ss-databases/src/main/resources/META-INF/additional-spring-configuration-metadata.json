@@ -1,22 +1,7 @@
 {
   "groups": [
-    {
-      "name": "ss.datasource",
-      "type": "com.ss.databases.shardingsphere.datasource.druid.SpringBootDruidDatasourceConfigurationProperties",
-      "sourceType": "com.ss.databases.shardingsphere.datasource.druid.SpringBootDruidDatasourceConfigurationProperties"
-    },
-    {
-      "name": "ss.druid-cfg",
-      "type": "com.ss.databases.shardingsphere.datasource.druid.YamlDruidConfiguration",
-      "sourceType": "com.ss.databases.shardingsphere.datasource.druid.SpringBootDruidConfigurationProperties"
-    }
   ],
   "properties": [
-    {
-      "name": "ss.druid-cfg.",
-      "type": "com.ss.databases.shardingsphere.datasource.druid.YamlDruidConfiguration",
-      "sourceType": "com.ss.databases.shardingsphere.datasource.druid.SpringBootDruidConfigurationProperties"
-    }
   ],
   "hints": [
   ]

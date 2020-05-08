@@ -16,51 +16,22 @@
 package com.ss.databases.shardingsphere.datasource.druid;
 
 import com.alibaba.druid.support.http.StatViewServlet;
+import com.ss.databases.shardingsphere.SpringBootConfiguration;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.AutoConfigureBefore;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 
 
 /**
  * @author lihengming [89921218@qq.com]
  */
-@ConditionalOnWebApplication
-@ConditionalOnProperty(name = "ss.druid-cfg.stat-view-servlet.enabled", havingValue = "true")
+
 public class DruidStatViewServletConfiguration {
 
-    @Autowired
-    private SpringBootDruidConfigurationProperties druidConfigurationProperties;
 
-
-    private static final String DEFAULT_ALLOW_IP = "127.0.0.1";
-
-    @Bean
-    public ServletRegistrationBean<StatViewServlet> statViewServletRegistrationBean() {
-         YamlDruidStatViewServlet properties = druidConfigurationProperties.getStatViewServlet();
-        ServletRegistrationBean<StatViewServlet> registrationBean = new ServletRegistrationBean<>();
-        registrationBean.setServlet(new StatViewServlet());
-        registrationBean.addUrlMappings(properties.getUrlPattern() != null ? properties.getUrlPattern() : "/druid/*");
-        if (properties.getAllow() != null) {
-            registrationBean.addInitParameter("allow", properties.getAllow());
-        } else {
-            registrationBean.addInitParameter("allow", DEFAULT_ALLOW_IP);
-        }
-        if (properties.getDeny() != null) {
-            registrationBean.addInitParameter("deny", properties.getDeny());
-        }
-        if (properties.getLoginUsername() != null) {
-            registrationBean.addInitParameter("loginUsername", properties.getLoginUsername());
-        }
-        if (properties.getLoginPassword() != null) {
-            registrationBean.addInitParameter("loginPassword", properties.getLoginPassword());
-        }
-        if (properties.getResetEnable() != null) {
-            registrationBean.addInitParameter("resetEnable", properties.getResetEnable());
-        }
-        return registrationBean;
-    }
 }
