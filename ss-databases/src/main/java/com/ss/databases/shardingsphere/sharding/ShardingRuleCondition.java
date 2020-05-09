@@ -17,6 +17,7 @@
 
 package com.ss.databases.shardingsphere.sharding;
 
+
 import com.ss.databases.shardingsphere.encrypt.EncryptRuleCondition;
 import com.ss.databases.shardingsphere.masterslave.MasterSlaveRuleCondition;
 import com.ss.databases.shardingsphere.shadow.ShadowRuleCondition;

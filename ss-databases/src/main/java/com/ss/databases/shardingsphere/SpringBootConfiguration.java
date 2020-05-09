@@ -17,12 +17,9 @@
 
 package com.ss.databases.shardingsphere;
 
-import com.alibaba.druid.pool.DruidDataSource;
 import com.alibaba.druid.support.http.StatViewServlet;
 import com.google.common.base.Preconditions;
 import com.ss.databases.shardingsphere.common.SpringBootPropertiesConfigurationProperties;
-import com.ss.databases.shardingsphere.datasource.YamlDataSourceConfiguration;
-import com.ss.databases.shardingsphere.datasource.druid.*;
 import com.ss.databases.shardingsphere.encrypt.EncryptRuleCondition;
 import com.ss.databases.shardingsphere.encrypt.SpringBootEncryptRuleConfigurationProperties;
 import com.ss.databases.shardingsphere.masterslave.MasterSlaveRuleCondition;
@@ -46,17 +43,16 @@ import org.apache.shardingsphere.spring.boot.util.PropertyUtil;
 import org.apache.shardingsphere.transaction.spring.ShardingTransactionTypeScanner;
 import org.apache.shardingsphere.underlying.common.config.inline.InlineExpressionParser;
 import org.apache.shardingsphere.underlying.common.exception.ShardingSphereException;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.AutoConfigureBefore;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
-import org.springframework.boot.configurationprocessor.json.JSONObject;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
-import org.springframework.boot.json.JacksonJsonParser;
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.context.EnvironmentAware;
-import org.springframework.context.annotation.*;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Conditional;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
 import org.springframework.core.env.StandardEnvironment;
 import org.springframework.jndi.JndiObjectFactoryBean;
@@ -64,7 +60,10 @@ import org.springframework.jndi.JndiObjectFactoryBean;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 import java.sql.SQLException;
-import java.util.*;
+import java.util.Collections;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Spring boot starter configuration.
@@ -74,37 +73,26 @@ import java.util.*;
 @EnableConfigurationProperties({
         SpringBootShardingRuleConfigurationProperties.class,
         SpringBootMasterSlaveRuleConfigurationProperties.class, SpringBootEncryptRuleConfigurationProperties.class,
-        SpringBootPropertiesConfigurationProperties.class, SpringBootShadowRuleConfigurationProperties.class,
-        SpringBootDruidDatasourceConfigurationProperties.class, SpringBootDruidConfigurationProperties.class,
-
-
-})
-//@Import({
-//        DruidStatViewServletConfiguration.class,DruidFilterConfiguration.class
-//})
+        SpringBootPropertiesConfigurationProperties.class, SpringBootShadowRuleConfigurationProperties.class})
+@ConditionalOnProperty(prefix = "ss.datasource", name = "enabled", havingValue = "true", matchIfMissing = true)
 @AutoConfigureBefore(DataSourceAutoConfiguration.class)
 @RequiredArgsConstructor
 public class SpringBootConfiguration implements EnvironmentAware {
-
+    
     private final SpringBootShardingRuleConfigurationProperties shardingRule;
-
+    
     private final SpringBootMasterSlaveRuleConfigurationProperties masterSlaveRule;
-
+    
     private final SpringBootEncryptRuleConfigurationProperties encryptRule;
-
+    
     private final SpringBootShadowRuleConfigurationProperties shadowRule;
-
+    
     private final SpringBootPropertiesConfigurationProperties props;
-
+    
     private final Map<String, DataSource> dataSourceMap = new LinkedHashMap<>();
-
-    private final SpringBootDruidDatasourceConfigurationProperties druidDatasource;
-
-    private final SpringBootDruidConfigurationProperties druidConfig;
-
-
+    
     private final String jndiName = "jndi-name";
-
+    
     /**
      * Get sharding data source bean.
      *
@@ -116,7 +104,7 @@ public class SpringBootConfiguration implements EnvironmentAware {
     public DataSource shardingDataSource() throws SQLException {
         return ShardingDataSourceFactory.createDataSource(dataSourceMap, new ShardingRuleConfigurationYamlSwapper().swap(shardingRule), props.getProps());
     }
-
+    
     /**
      * Get master-slave data source bean.
      *
@@ -128,7 +116,7 @@ public class SpringBootConfiguration implements EnvironmentAware {
     public DataSource masterSlaveDataSource() throws SQLException {
         return MasterSlaveDataSourceFactory.createDataSource(dataSourceMap, new MasterSlaveRuleConfigurationYamlSwapper().swap(masterSlaveRule), props.getProps());
     }
-
+    
     /**
      * Get encrypt data source bean.
      *
@@ -140,7 +128,7 @@ public class SpringBootConfiguration implements EnvironmentAware {
     public DataSource encryptDataSource() throws SQLException {
         return EncryptDataSourceFactory.createDataSource(dataSourceMap.values().iterator().next(), new EncryptRuleConfigurationYamlSwapper().swap(encryptRule), props.getProps());
     }
-
+    
     /**
      * Get shadow data source bean.
      *
@@ -152,7 +140,7 @@ public class SpringBootConfiguration implements EnvironmentAware {
     public DataSource shadowDataSource() throws SQLException {
         return ShadowDataSourceFactory.createDataSource(dataSourceMap, new ShadowRuleConfigurationYamlSwapper().swap(shadowRule), props.getProps());
     }
-
+    
     /**
      * Create sharding transaction type scanner.
      *
@@ -163,83 +151,44 @@ public class SpringBootConfiguration implements EnvironmentAware {
         return new ShardingTransactionTypeScanner();
     }
 
-    private static final String DEFAULT_ALLOW_IP = "127.0.0.1";
-
-    // 开启 druid 监控
+    /**
+     *  创建 druid 监控页面
+     */
     @Bean
-    @ConditionalOnWebApplication
-    @ConditionalOnProperty(name = "ss.druid-cfg.stat-view-servlet.enabled", havingValue = "true")
-    public ServletRegistrationBean<StatViewServlet> statViewServletRegistrationBean() {
-        YamlDruidStatViewServlet properties = druidConfig.getStatViewServlet();
-        ServletRegistrationBean<StatViewServlet> registrationBean = new ServletRegistrationBean<>();
-        registrationBean.setServlet(new StatViewServlet());
-        registrationBean.addUrlMappings(properties.getUrlPattern() != null ? properties.getUrlPattern() : "/druid/*");
-        if (properties.getAllow() != null) {
-            registrationBean.addInitParameter("allow", properties.getAllow());
-        } else {
-            registrationBean.addInitParameter("allow", DEFAULT_ALLOW_IP);
-        }
-        if (properties.getDeny() != null) {
-            registrationBean.addInitParameter("deny", properties.getDeny());
-        }
-        if (properties.getLoginUsername() != null) {
-            registrationBean.addInitParameter("loginUsername", properties.getLoginUsername());
-        }
-        if (properties.getLoginPassword() != null) {
-            registrationBean.addInitParameter("loginPassword", properties.getLoginPassword());
-        }
-        if (properties.getResetEnable() != null) {
-            registrationBean.addInitParameter("resetEnable", properties.getResetEnable());
-        }
-        return registrationBean;
+    public ServletRegistrationBean<StatViewServlet> statViewServlet() {
+        //创建servlet注册实体
+        ServletRegistrationBean<StatViewServlet> servletRegistrationBean = new ServletRegistrationBean<>(new StatViewServlet(), "/druid/*");
+        //设置ip白名单
+        servletRegistrationBean.addInitParameter("allow", "127.0.0.1");
+        //设置控制台管理用户
+        servletRegistrationBean.addInitParameter("loginUsername", "admin");
+        servletRegistrationBean.addInitParameter("loginPassword", "123456");
+        //是否可以重置数据
+        servletRegistrationBean.addInitParameter("resetEnable", "true");
+        return servletRegistrationBean;
     }
-
+    
     @Override
     public final void setEnvironment(final Environment environment) {
         String prefix = "ss.datasource.";
-//        for (String each : getDataSourceNames(environment, prefix)) {
-//            try {
-//                dataSourceMap.put(each, getDataSource(environment, prefix, each));
-//            } catch (final ReflectiveOperationException ex) {
-//                throw new ShardingSphereException("Can't find datasource type!", ex);
-//            } catch (final NamingException namingEx) {
-//                throw new ShardingSphereException("Can't find JNDI datasource!", namingEx);
-//            }
-//        }
-        Map<String, YamlDataSourceConfiguration> dataSourceConfigurationMap = druidDatasource.getDatasource();
-        dataSourceConfigurationMap.forEach((k, v) -> {
+        for (String each : getDataSourceNames(environment, prefix)) {
             try {
-                dataSourceMap.put(k, getDataSource(environment,prefix,k,v));
+                dataSourceMap.put(each, getDataSource(environment, prefix, each));
             } catch (final ReflectiveOperationException ex) {
                 throw new ShardingSphereException("Can't find datasource type!", ex);
             } catch (final NamingException namingEx) {
                 throw new ShardingSphereException("Can't find JNDI datasource!", namingEx);
             }
-
-        });
-
+        }
     }
-
+    
     private List<String> getDataSourceNames(final Environment environment, final String prefix) {
         StandardEnvironment standardEnv = (StandardEnvironment) environment;
         standardEnv.setIgnoreUnresolvableNestedPlaceholders(true);
         return null == standardEnv.getProperty(prefix + "name")
                 ? new InlineExpressionParser(standardEnv.getProperty(prefix + "names")).splitAndEvaluate() : Collections.singletonList(standardEnv.getProperty(prefix + "name"));
     }
-
-    @SuppressWarnings("unchecked")
-    private DataSource getDataSource(Environment environment, String prefix, String dataSourceName, YamlDataSourceConfiguration yamlDataSourceConfiguration) throws ReflectiveOperationException, NamingException {
-        if (yamlDataSourceConfiguration.getJndiName() != null) {
-            return getJndiDataSource(yamlDataSourceConfiguration.getJndiName());
-        }
-        Map<String, Object> dataSourceProps = yamlDataSourceConfiguration.toMap();
-        DataSource result = DataSourceUtil.getDataSource(yamlDataSourceConfiguration.getType().getName(), dataSourceProps);
-
-        DataSourcePropertiesSetterHolder.getDataSourcePropertiesSetterByType(dataSourceProps.get("type").toString()).ifPresent(
-                dataSourcePropertiesSetter -> dataSourcePropertiesSetter.propertiesSet(environment, prefix, dataSourceName, result));
-        return result;
-    }
-
+    
     @SuppressWarnings("unchecked")
     private DataSource getDataSource(final Environment environment, final String prefix, final String dataSourceName) throws ReflectiveOperationException, NamingException {
         Map<String, Object> dataSourceProps = PropertyUtil.handle(environment, prefix + dataSourceName.trim(), Map.class);
@@ -247,17 +196,12 @@ public class SpringBootConfiguration implements EnvironmentAware {
         if (dataSourceProps.containsKey(jndiName)) {
             return getJndiDataSource(dataSourceProps.get(jndiName).toString());
         }
-
         DataSource result = DataSourceUtil.getDataSource(dataSourceProps.get("type").toString(), dataSourceProps);
         DataSourcePropertiesSetterHolder.getDataSourcePropertiesSetterByType(dataSourceProps.get("type").toString()).ifPresent(
-                dataSourcePropertiesSetter -> dataSourcePropertiesSetter.propertiesSet(environment, prefix, dataSourceName, result));
+            dataSourcePropertiesSetter -> dataSourcePropertiesSetter.propertiesSet(environment, prefix, dataSourceName, result));
         return result;
     }
-
-    private DataSource getOtherDataSource(){
-        return null;
-    }
-
+    
     private DataSource getJndiDataSource(final String jndiName) throws NamingException {
         JndiObjectFactoryBean bean = new JndiObjectFactoryBean();
         bean.setResourceRef(true);
