@@ -17,36 +17,43 @@
 
 package com.ss.databases.shardingsphere.druid;
 
+import cn.hutool.core.util.CharUtil;
+import cn.hutool.core.util.StrUtil;
 import com.alibaba.druid.pool.DruidDataSource;
 import lombok.SneakyThrows;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.shardingsphere.spring.boot.datasource.DataSourcePropertiesSetter;
 import org.apache.shardingsphere.spring.boot.util.PropertyUtil;
 import org.springframework.core.env.Environment;
 
 import javax.sql.DataSource;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
 
 /**
  * Hikari datasource properties setter.
  */
+@Slf4j
 public final class DruidDataSourcePropertiesSetter implements DataSourcePropertiesSetter {
-    
+
     @Override
     public void propertiesSet(final Environment environment, final String prefix, final String dataSourceName, final DataSource dataSource) {
         Properties properties = new Properties();
         String datasourcePropertiesKey = prefix + dataSourceName.trim() + ".druid-cfg";
         if (PropertyUtil.containPropertyPrefix(environment, datasourcePropertiesKey)) {
-            Map datasourceProperties = PropertyUtil.handle(environment, datasourcePropertiesKey, Map.class);
-            properties.putAll(datasourceProperties);
+            Map<String, Object> datasourceProperties = PropertyUtil.handle(environment, datasourcePropertiesKey, Map.class);
+            Map<String, Object> druidDatasourceProperties = new HashMap<>();
+            datasourceProperties.forEach((k,v)-> druidDatasourceProperties.put("druid." + StrUtil.toCamelCase(k.replaceAll("-", "_")), v));
+            properties.putAll(druidDatasourceProperties);
             DruidDataSource druidDataSource = (DruidDataSource) dataSource;
-            druidDataSource.setMaxActive((Integer) properties.get("max-active"));
-//            Method method = dataSource.getClass().getMethod("setDataSourceProperties", Properties.class);
-//            method.invoke(dataSource, properties);
+            druidDataSource.configFromPropety(properties);
         }
     }
-    
+
+
     @Override
     public String getType() {
         return "com.alibaba.druid.pool.DruidDataSource";
