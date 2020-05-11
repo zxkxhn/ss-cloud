@@ -74,10 +74,18 @@
       "sourceType": "com.ss.databases.shardingsphere.SpringBootConfiguration"
     },
     {
+      "name": "ss.druid.stat",
+      "type": "java.lang.String",
+      "sourceType": "com.alibaba.druid.pool.DruidAbstractDataSource"
+    },
+    {
       "name": "ss.datasource",
       "type": "java.util.Map<java.lang.String,java.util.Map<java.lang.String,java.lang.Object>>",
       "sourceType": "org.apache.shardingsphere.spring.boot.util.DataSourceUtil"
     },
+
+
+
     {
       "sourceType": "org.apache.shardingsphere.core.yaml.config.sharding.YamlShardingStrategyConfiguration",
       "name": "ss.shardingsphere.sharding.default-database-strategy.complex",

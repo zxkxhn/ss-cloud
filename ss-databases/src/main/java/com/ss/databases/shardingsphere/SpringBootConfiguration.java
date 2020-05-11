@@ -20,6 +20,7 @@ package com.ss.databases.shardingsphere;
 import com.alibaba.druid.support.http.StatViewServlet;
 import com.google.common.base.Preconditions;
 import com.ss.databases.shardingsphere.common.SpringBootPropertiesConfigurationProperties;
+import com.ss.databases.shardingsphere.druid.properties.SpringBootDruidStatConfigurationProperties;
 import com.ss.databases.shardingsphere.encrypt.EncryptRuleCondition;
 import com.ss.databases.shardingsphere.encrypt.SpringBootEncryptRuleConfigurationProperties;
 import com.ss.databases.shardingsphere.masterslave.MasterSlaveRuleCondition;
@@ -73,7 +74,11 @@ import java.util.Map;
 @EnableConfigurationProperties({
         SpringBootShardingRuleConfigurationProperties.class,
         SpringBootMasterSlaveRuleConfigurationProperties.class, SpringBootEncryptRuleConfigurationProperties.class,
-        SpringBootPropertiesConfigurationProperties.class, SpringBootShadowRuleConfigurationProperties.class})
+        SpringBootPropertiesConfigurationProperties.class, SpringBootShadowRuleConfigurationProperties.class,
+        SpringBootDruidStatConfigurationProperties.class
+
+
+})
 @ConditionalOnProperty(prefix = "ss.datasource", name = "enabled", havingValue = "true", matchIfMissing = true)
 @AutoConfigureBefore(DataSourceAutoConfiguration.class)
 @RequiredArgsConstructor
@@ -88,6 +93,8 @@ public class SpringBootConfiguration implements EnvironmentAware {
     private final SpringBootShadowRuleConfigurationProperties shadowRule;
     
     private final SpringBootPropertiesConfigurationProperties props;
+
+    private final SpringBootDruidStatConfigurationProperties druidStatConfig;
     
     private final Map<String, DataSource> dataSourceMap = new LinkedHashMap<>();
     
@@ -156,6 +163,7 @@ public class SpringBootConfiguration implements EnvironmentAware {
      */
     @Bean
     public ServletRegistrationBean<StatViewServlet> statViewServlet() {
+
         //创建servlet注册实体
         ServletRegistrationBean<StatViewServlet> servletRegistrationBean = new ServletRegistrationBean<>(new StatViewServlet(), "/druid/*");
         //设置ip白名单
