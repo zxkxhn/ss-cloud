@@ -45,6 +45,7 @@ import org.apache.shardingsphere.transaction.spring.ShardingTransactionTypeScann
 import org.apache.shardingsphere.underlying.common.config.inline.InlineExpressionParser;
 import org.apache.shardingsphere.underlying.common.exception.ShardingSphereException;
 import org.springframework.boot.autoconfigure.AutoConfigureBefore;
+import org.springframework.boot.autoconfigure.ImportAutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -74,9 +75,12 @@ import java.util.Map;
         SpringBootShardingRuleConfigurationProperties.class,
         SpringBootMasterSlaveRuleConfigurationProperties.class, SpringBootEncryptRuleConfigurationProperties.class,
         SpringBootPropertiesConfigurationProperties.class, SpringBootShadowRuleConfigurationProperties.class,
-        SpringBootDruidStatConfigurationProperties.class, DruidStatViewServletConfiguration.class
+        SpringBootDruidStatConfigurationProperties.class,
 
 
+})
+@ImportAutoConfiguration({
+        DruidStatViewServletConfiguration.class
 })
 @ConditionalOnProperty(prefix = "ss.datasource", name = "enabled", havingValue = "true", matchIfMissing = true)
 @AutoConfigureBefore(DataSourceAutoConfiguration.class)

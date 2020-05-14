@@ -55,17 +55,67 @@
       "type": "org.apache.shardingsphere.core.yaml.config.sharding.strategy.YamlStandardShardingStrategyConfiguration"
     },
     {
-      "sourceType": "com.ss.databases.druid.properties.YamlStatViewServlet",
+      "sourceType": "com.ss.databases.druid.SpringBootDruidStatConfigurationProperties",
       "name": "ss.druid.stat-view-servlet",
       "type": "com.ss.databases.druid.properties.YamlStatViewServlet"
     }
   ],
   "properties": [
     {
-      "sourceType": "com.ss.databases.druid.properties.YamlDruidStatProperties",
-      "name": "ss.druid.stat-view-servlet",
-      "type": "com.ss.databases.druid.properties.YamlStatViewServlet"
+      "sourceType": "com.ss.databases.druid.SpringBootDruidStatConfigurationProperties",
+      "name": "ss.druid.stat-view-servlet.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether enable druid StatViewServlet or not.",
+      "defaultValue": true
     },
+    {
+      "sourceType": "com.ss.databases.druid.SpringBootDruidStatConfigurationProperties",
+      "name": "ss.druid.stat-view-servlet.url-pattern",
+      "type": "java.lang.String",
+      "defaultValue": "/druid/*"
+    },
+    {
+      "sourceType": "com.ss.databases.druid.SpringBootDruidStatConfigurationProperties",
+      "name": "ss.druid.stat-view-servlet.allow",
+      "type": "java.lang.String",
+      "defaultValue": "127.0.0.1"
+    },
+    {
+      "sourceType": "com.ss.databases.druid.SpringBootDruidStatConfigurationProperties",
+      "name": "ss.druid.stat-view-servlet.deny",
+      "type": "java.lang.String",
+      "defaultValue": "128.242.127.1/24,128.242.128.1"
+    },
+    {
+      "sourceType": "com.ss.databases.druid.SpringBootDruidStatConfigurationProperties",
+      "name": "ss.druid.stat-view-servlet.loginUsername",
+      "type": "java.lang.String",
+      "defaultValue": "admin"
+    },
+    {
+      "sourceType": "com.ss.databases.druid.SpringBootDruidStatConfigurationProperties",
+      "name": "ss.druid.stat-view-servlet.loginPassword",
+      "type": "java.lang.String",
+      "defaultValue": "123456"
+    },
+    {
+      "sourceType": "com.ss.databases.druid.SpringBootDruidStatConfigurationProperties",
+      "name": "ss.druid.stat-view-servlet.resetEnable",
+      "type": "java.lang.Boolean",
+      "defaultValue": true
+    },
+
+
+
+
+
+
+
+
+
+
+
+
 
     {
       "name": "ss.shardingsphere.enabled",
@@ -219,10 +269,6 @@
       "name": "ss.shardingsphere.sharding.default-table-strategy.standard.sharding-column",
       "type": "java.lang.String"
     }
-
-
-
-
   ],
   "hints": [
     {
