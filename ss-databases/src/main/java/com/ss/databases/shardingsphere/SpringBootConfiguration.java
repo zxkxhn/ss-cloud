@@ -20,7 +20,8 @@ package com.ss.databases.shardingsphere;
 import com.alibaba.druid.support.http.StatViewServlet;
 import com.google.common.base.Preconditions;
 import com.ss.databases.shardingsphere.common.SpringBootPropertiesConfigurationProperties;
-import com.ss.databases.shardingsphere.druid.properties.SpringBootDruidStatConfigurationProperties;
+import com.ss.databases.shardingsphere.druid.SpringBootDruidStatConfigurationProperties;
+import com.ss.databases.shardingsphere.druid.stat.DruidStatViewServletConfiguration;
 import com.ss.databases.shardingsphere.encrypt.EncryptRuleCondition;
 import com.ss.databases.shardingsphere.encrypt.SpringBootEncryptRuleConfigurationProperties;
 import com.ss.databases.shardingsphere.masterslave.MasterSlaveRuleCondition;
@@ -75,7 +76,7 @@ import java.util.Map;
         SpringBootShardingRuleConfigurationProperties.class,
         SpringBootMasterSlaveRuleConfigurationProperties.class, SpringBootEncryptRuleConfigurationProperties.class,
         SpringBootPropertiesConfigurationProperties.class, SpringBootShadowRuleConfigurationProperties.class,
-        SpringBootDruidStatConfigurationProperties.class
+        SpringBootDruidStatConfigurationProperties.class, DruidStatViewServletConfiguration.class
 
 
 })
@@ -158,24 +159,6 @@ public class SpringBootConfiguration implements EnvironmentAware {
         return new ShardingTransactionTypeScanner();
     }
 
-    /**
-     *  创建 druid 监控页面
-     */
-    @Bean
-    public ServletRegistrationBean<StatViewServlet> statViewServlet() {
-
-        //创建servlet注册实体
-        ServletRegistrationBean<StatViewServlet> servletRegistrationBean = new ServletRegistrationBean<>(new StatViewServlet(), "/druid/*");
-        //设置ip白名单
-        servletRegistrationBean.addInitParameter("allow", "127.0.0.1");
-        //设置控制台管理用户
-        servletRegistrationBean.addInitParameter("loginUsername", "admin");
-        servletRegistrationBean.addInitParameter("loginPassword", "123456");
-        //是否可以重置数据
-        servletRegistrationBean.addInitParameter("resetEnable", "true");
-        return servletRegistrationBean;
-    }
-    
     @Override
     public final void setEnvironment(final Environment environment) {
         String prefix = "ss.datasource.";

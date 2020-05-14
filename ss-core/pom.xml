@@ -85,7 +85,7 @@
         <!-- dubbo集成 -->
         <dependency>
             <groupId>com.alibaba.cloud</groupId>
-            <artifactId>spring-cloud-alibaba-dubbo</artifactId>
+            <artifactId>spring-cloud-starter-dubbo</artifactId>
         </dependency>
 
         <dependency>

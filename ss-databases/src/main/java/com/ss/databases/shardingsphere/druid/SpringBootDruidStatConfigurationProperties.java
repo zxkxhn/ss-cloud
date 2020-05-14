@@ -15,13 +15,14 @@
  * limitations under the License.
  */
 
-package com.ss.databases.shardingsphere.druid.properties;
+package com.ss.databases.shardingsphere.druid;
 
+import com.ss.databases.shardingsphere.druid.properties.DruidStatProperties;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 /**
  * Encrypt rule configuration properties.
  */
 @ConfigurationProperties("ss.druid")
-public class SpringBootDruidStatConfigurationProperties extends YamlDruidStatProperties {
+public class SpringBootDruidStatConfigurationProperties extends DruidStatProperties {
 }

@@ -23,7 +23,7 @@ import lombok.Setter;
  */
 @Getter
 @Setter
-public class YamlDruidStatProperties {
+public class DruidStatProperties {
 
     private String[] aopPatterns;
     private StatViewServlet statViewServlet = new StatViewServlet();
