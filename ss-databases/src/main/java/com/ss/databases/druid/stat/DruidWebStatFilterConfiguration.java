@@ -13,10 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.ss.databases.shardingsphere.druid.stat;
+package com.ss.databases.druid.stat;
 
 import com.alibaba.druid.support.http.WebStatFilter;
-import com.ss.databases.shardingsphere.druid.properties.DruidStatProperties;
+import com.ss.databases.druid.properties.YamlDruidStatProperties;
+import com.ss.databases.druid.properties.YamlWebStatFilter;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
@@ -29,8 +30,8 @@ import org.springframework.context.annotation.Bean;
 @ConditionalOnProperty(name = "ss.druid.web-stat-filter.enabled", havingValue = "true")
 public class DruidWebStatFilterConfiguration {
     @Bean
-    public FilterRegistrationBean<WebStatFilter> webStatFilterRegistrationBean(DruidStatProperties properties) {
-        DruidStatProperties.WebStatFilter config = properties.getWebStatFilter();
+    public FilterRegistrationBean<WebStatFilter> webStatFilterRegistrationBean(YamlDruidStatProperties properties) {
+        YamlWebStatFilter config = properties.getWebStatFilter();
         FilterRegistrationBean<WebStatFilter> registrationBean = new FilterRegistrationBean<>();
         WebStatFilter filter = new WebStatFilter();
         registrationBean.setFilter(filter);

@@ -17,11 +17,10 @@
 
 package com.ss.databases.shardingsphere;
 
-import com.alibaba.druid.support.http.StatViewServlet;
 import com.google.common.base.Preconditions;
+import com.ss.databases.druid.SpringBootDruidStatConfigurationProperties;
+import com.ss.databases.druid.stat.DruidStatViewServletConfiguration;
 import com.ss.databases.shardingsphere.common.SpringBootPropertiesConfigurationProperties;
-import com.ss.databases.shardingsphere.druid.SpringBootDruidStatConfigurationProperties;
-import com.ss.databases.shardingsphere.druid.stat.DruidStatViewServletConfiguration;
 import com.ss.databases.shardingsphere.encrypt.EncryptRuleCondition;
 import com.ss.databases.shardingsphere.encrypt.SpringBootEncryptRuleConfigurationProperties;
 import com.ss.databases.shardingsphere.masterslave.MasterSlaveRuleCondition;
@@ -49,7 +48,6 @@ import org.springframework.boot.autoconfigure.AutoConfigureBefore;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
-import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.context.EnvironmentAware;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;

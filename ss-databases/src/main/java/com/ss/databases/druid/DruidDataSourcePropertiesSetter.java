@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-package com.ss.databases.shardingsphere.druid;
+package com.ss.databases.druid;
 
 import cn.hutool.core.util.StrUtil;
 import com.alibaba.druid.pool.DruidDataSource;

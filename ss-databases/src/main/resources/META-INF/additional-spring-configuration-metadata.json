@@ -54,17 +54,18 @@
       "name": "ss.shardingsphere.sharding.default-database-strategy.standard",
       "type": "org.apache.shardingsphere.core.yaml.config.sharding.strategy.YamlStandardShardingStrategyConfiguration"
     },
-
     {
-      "sourceType": "com.ss.databases.shardingsphere.druid.SpringBootDruidStatConfigurationProperties",
-      "name": "ss.druid",
-      "type": "com.ss.databases.shardingsphere.druid.SpringBootDruidStatConfigurationProperties"
+      "sourceType": "com.ss.databases.druid.properties.YamlStatViewServlet",
+      "name": "ss.druid.stat-view-servlet",
+      "type": "com.ss.databases.druid.properties.YamlStatViewServlet"
     }
   ],
   "properties": [
-
-
-
+    {
+      "sourceType": "com.ss.databases.druid.properties.YamlDruidStatProperties",
+      "name": "ss.druid.stat-view-servlet",
+      "type": "com.ss.databases.druid.properties.YamlStatViewServlet"
+    },
 
     {
       "name": "ss.shardingsphere.enabled",

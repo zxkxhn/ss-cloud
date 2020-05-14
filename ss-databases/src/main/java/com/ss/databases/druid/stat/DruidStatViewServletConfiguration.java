@@ -13,10 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.ss.databases.shardingsphere.druid.stat;
+package com.ss.databases.druid.stat;
 
 import com.alibaba.druid.support.http.StatViewServlet;
-import com.ss.databases.shardingsphere.druid.properties.DruidStatProperties;
+import com.ss.databases.druid.properties.YamlDruidStatProperties;
+import com.ss.databases.druid.properties.YamlStatViewServlet;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
@@ -31,8 +32,8 @@ public class DruidStatViewServletConfiguration {
     private static final String DEFAULT_ALLOW_IP = "127.0.0.1";
 
     @Bean
-    public ServletRegistrationBean<StatViewServlet> statViewServletRegistrationBean(DruidStatProperties properties) {
-        DruidStatProperties.StatViewServlet config = properties.getStatViewServlet();
+    public ServletRegistrationBean<StatViewServlet> statViewServletRegistrationBean(YamlDruidStatProperties properties) {
+        YamlStatViewServlet config = properties.getStatViewServlet();
         ServletRegistrationBean<StatViewServlet> registrationBean = new ServletRegistrationBean<>();
         registrationBean.setServlet(new StatViewServlet());
         registrationBean.addUrlMappings(config.getUrlPattern() != null ? config.getUrlPattern() : "/druid/*");

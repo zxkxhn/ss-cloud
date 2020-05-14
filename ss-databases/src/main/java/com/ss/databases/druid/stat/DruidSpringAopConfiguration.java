@@ -13,10 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.ss.databases.shardingsphere.druid.stat;
+package com.ss.databases.druid.stat;
 
 import com.alibaba.druid.support.spring.stat.DruidStatInterceptor;
-import com.ss.databases.shardingsphere.druid.properties.DruidStatProperties;
+import com.ss.databases.druid.properties.YamlDruidStatProperties;
 import org.aopalliance.aop.Advice;
 import org.springframework.aop.Advisor;
 import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator;
@@ -36,7 +36,7 @@ public class DruidSpringAopConfiguration {
     }
 
     @Bean
-    public Advisor advisor(DruidStatProperties properties) {
+    public Advisor advisor(YamlDruidStatProperties properties) {
         return new RegexpMethodPointcutAdvisor(properties.getAopPatterns(), advice());
     }
 
