@@ -17,16 +17,15 @@
 
 package com.ss.databases.druid;
 
-import cn.hutool.core.util.StrUtil;
+import cn.hutool.core.bean.BeanUtil;
 import com.alibaba.druid.pool.DruidDataSource;
+import com.ss.databases.druid.properties.YamlDruidConnPoolProperties;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shardingsphere.spring.boot.datasource.DataSourcePropertiesSetter;
 import org.apache.shardingsphere.spring.boot.util.PropertyUtil;
 import org.springframework.core.env.Environment;
 
 import javax.sql.DataSource;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Properties;
 
 /**
@@ -40,12 +39,14 @@ public final class DruidDataSourcePropertiesSetter implements DataSourceProperti
         Properties properties = new Properties();
         String datasourcePropertiesKey = prefix + dataSourceName.trim() + ".druid-cfg";
         if (PropertyUtil.containPropertyPrefix(environment, datasourcePropertiesKey)) {
-            Map<String, Object> datasourceProperties = PropertyUtil.handle(environment, datasourcePropertiesKey, Map.class);
-            Map<String, String> druidDatasourceProperties = new HashMap<>();
-            datasourceProperties.forEach((k,v)-> druidDatasourceProperties.put("druid." + StrUtil.toCamelCase(k.replaceAll("-", "_")), v.toString()));
-            properties.putAll(druidDatasourceProperties);
+            YamlDruidConnPoolProperties datasourceProperties = PropertyUtil.handle(environment, datasourcePropertiesKey, YamlDruidConnPoolProperties.class);
             DruidDataSource druidDataSource = (DruidDataSource) dataSource;
-            druidDataSource.configFromPropety(properties);
+            BeanUtil.copyProperties(datasourceProperties, druidDataSource);
+//            Map<String,Object> map = Map.
+            //            Map<String, String> druidDatasourceProperties = new HashMap<>();
+//            datasourceProperties.forEach((k,v)-> druidDatasourceProperties.put("druid." + StrUtil.toCamelCase(k.replaceAll("-", "_")), v.toString()));
+//            properties.putAll(druidDatasourceProperties);
+//            druidDataSource.configFromPropety(properties);
         }
     }
 
