@@ -62,6 +62,74 @@
   ],
   "properties": [
     {
+      "name": "ss.druid.connection-properties",
+      "type": "java.lang.String",
+      "sourceType": "com.alibaba.druid.pool.DruidDataSource"
+    },
+    {
+      "name": "ss.druid.filters",
+      "type": "java.lang.String",
+      "sourceType": "com.alibaba.druid.pool.DruidDataSource"
+    },
+    {
+      "name": "ss.druid.filter.stat.enabled",
+      "type": "java.lang.Boolean",
+      "sourceType": "com.ss.databases.druid.stat.DruidFilterConfiguration",
+      "description": "Enable StatFilter.",
+      "defaultValue": true
+    },
+    {
+      "name": "ss.druid.filter.config.enabled",
+      "type": "java.lang.Boolean",
+      "sourceType": "com.ss.databases.druid.stat.DruidFilterConfiguration",
+      "description": "Enable ConfigFilter.",
+      "defaultValue": false
+    },
+    {
+      "name": "ss.druid.filter.encoding.enabled",
+      "type": "java.lang.Boolean",
+      "sourceType": "com.ss.databases.druid.stat.DruidFilterConfiguration",
+      "description": "Enable EncodingConvertFilter.",
+      "defaultValue": false
+    },
+    {
+      "name": "ss.druid.filter.slf4j.enabled",
+      "type": "java.lang.Boolean",
+      "sourceType": "com.ss.databases.druid.stat.DruidFilterConfiguration",
+      "description": "Enable Slf4jLogFilter.",
+      "defaultValue": false
+    },
+    {
+      "name": "ss.druid.filter.log4j.enabled",
+      "type": "java.lang.Boolean",
+      "sourceType": "com.ss.databases.druid.stat.DruidFilterConfiguration",
+      "description": "Enable Log4jFilter.",
+      "defaultValue": false
+    },
+    {
+      "name": "ss.druid.filter.log4j2.enabled",
+      "type": "java.lang.Boolean",
+      "sourceType": "com.ss.databases.druid.stat.DruidFilterConfiguration",
+      "description": "Enable Log4j2Filter.",
+      "defaultValue": false
+    },
+    {
+      "name": "ss.druid.filter.commons-log.enabled",
+      "type": "java.lang.Boolean",
+      "sourceType": "com.ss.databases.druid.stat.DruidFilterConfiguration",
+      "description": "Enable CommonsLogFilter.",
+      "defaultValue": false
+    },
+    {
+      "name": "ss.druid.filter.wall.enabled",
+      "type": "java.lang.Boolean",
+      "sourceType": "com.ss.databases.druid.stat.DruidFilterConfiguration",
+      "description": "Enable WallFilter.",
+      "defaultValue": false
+    },
+
+    
+    {
       "sourceType": "com.ss.databases.druid.SpringBootDruidStatConfigurationProperties",
       "name": "ss.druid.stat-view-servlet.enabled",
       "type": "java.lang.Boolean",
@@ -271,6 +339,138 @@
     }
   ],
   "hints": [
+    {
+      "name": "ss.druid.filter.stat.db-type",
+      "type": "java.lang.String",
+      "values": [
+        {
+          "value": "db2"
+        },
+        {
+          "value": "postgresql"
+        },
+        {
+          "value": "sqlserver"
+        },
+        {
+          "value": "oracle"
+        },
+        {
+          "value": "AliOracle"
+        },
+        {
+          "value": "mysql"
+        },
+        {
+          "value": "mariadb"
+        },
+        {
+          "value": "hive"
+        },
+        {
+          "value": "h2"
+        },
+        {
+          "value": "dm"
+        },
+        {
+          "value": "kingbase"
+        },
+        {
+          "value": "oceanbase"
+        },
+        {
+          "value": "xugu"
+        },
+        {
+          "value": "odps"
+        },
+        {
+          "value": "teradata"
+        },
+        {
+          "value": "log4jdbc"
+        },
+        {
+          "value": "phoenix"
+        },
+        {
+          "value": "edb"
+        },
+        {
+          "value": "kylin"
+        },
+        {
+          "value": "sqlite"
+        }
+      ]
+    },
+    {
+      "name": "ss.druid.filter.wall.db-type",
+      "type": "java.lang.String",
+      "values": [
+        {
+          "value": "db2"
+        },
+        {
+          "value": "postgresql"
+        },
+        {
+          "value": "sqlserver"
+        },
+        {
+          "value": "oracle"
+        },
+        {
+          "value": "AliOracle"
+        },
+        {
+          "value": "mysql"
+        },
+        {
+          "value": "mariadb"
+        },
+        {
+          "value": "hive"
+        },
+        {
+          "value": "h2"
+        },
+        {
+          "value": "dm"
+        },
+        {
+          "value": "kingbase"
+        },
+        {
+          "value": "oceanbase"
+        },
+        {
+          "value": "xugu"
+        },
+        {
+          "value": "odps"
+        },
+        {
+          "value": "teradata"
+        },
+        {
+          "value": "log4jdbc"
+        },
+        {
+          "value": "phoenix"
+        },
+        {
+          "value": "edb"
+        },
+        {
+          "value": "kylin"
+        },
+        {
+          "value": "sqlite"
+        }
+      ]
+    },
     {
       "name": "ss.datasource.keys",
       "values": []

@@ -17,16 +17,15 @@
 
 package com.ss.databases.druid;
 
-import cn.hutool.core.bean.BeanUtil;
 import com.alibaba.druid.pool.DruidDataSource;
 import com.ss.databases.druid.properties.YamlDruidConnPoolProperties;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shardingsphere.spring.boot.datasource.DataSourcePropertiesSetter;
 import org.apache.shardingsphere.spring.boot.util.PropertyUtil;
+import org.springframework.beans.BeanUtils;
 import org.springframework.core.env.Environment;
 
 import javax.sql.DataSource;
-import java.util.Properties;
 
 /**
  * Hikari datasource properties setter.
@@ -36,17 +35,11 @@ public final class DruidDataSourcePropertiesSetter implements DataSourceProperti
 
     @Override
     public void propertiesSet(final Environment environment, final String prefix, final String dataSourceName, final DataSource dataSource) {
-        Properties properties = new Properties();
         String datasourcePropertiesKey = prefix + dataSourceName.trim() + ".druid-cfg";
         if (PropertyUtil.containPropertyPrefix(environment, datasourcePropertiesKey)) {
             YamlDruidConnPoolProperties datasourceProperties = PropertyUtil.handle(environment, datasourcePropertiesKey, YamlDruidConnPoolProperties.class);
             DruidDataSource druidDataSource = (DruidDataSource) dataSource;
-            BeanUtil.copyProperties(datasourceProperties, druidDataSource);
-//            Map<String,Object> map = Map.
-            //            Map<String, String> druidDatasourceProperties = new HashMap<>();
-//            datasourceProperties.forEach((k,v)-> druidDatasourceProperties.put("druid." + StrUtil.toCamelCase(k.replaceAll("-", "_")), v.toString()));
-//            properties.putAll(druidDatasourceProperties);
-//            druidDataSource.configFromPropety(properties);
+            BeanUtils.copyProperties(datasourceProperties, druidDataSource);
         }
     }
 

@@ -31,8 +31,8 @@ public class YamlDruidConnPoolProperties {
     /**
      * 已经不再使用，配置了也没效果
      */
-    @Deprecated
-    private Integer maxIdle = DruidAbstractDataSource.DEFAULT_MAX_IDLE;
+//    @Deprecated
+//    private Integer maxIdle = DruidAbstractDataSource.DEFAULT_MAX_IDLE;
 
     /**
      * 获取连接时最大等待时间，单位毫秒。配置了maxWait之后，缺省启用公平锁，
