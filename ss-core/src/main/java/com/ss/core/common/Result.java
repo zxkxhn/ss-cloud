@@ -1,12 +1,13 @@
 package com.ss.core.common;
 
 import com.ss.core.exception.SystemErrorTypeEnum;
+import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 import java.io.Serializable;
 
-//@ApiModel(value = "Result", description = "接口返回对象" )
+@ApiModel(value = "Result", description = "接口返回对象" )
 @Data
 public class Result<T> implements Serializable {
 
@@ -90,8 +91,8 @@ public class Result<T> implements Serializable {
     }
 
 
-    public static <T> Result<T> fail(String msg) {
-        return new Result<>(SystemErrorTypeEnum.SYSTEM_ERROR.getCode(), msg, null);
+    public static <T> void fail(String msg) {
+        new Result<>(SystemErrorTypeEnum.SYSTEM_ERROR.getCode(), msg, null);
     }
 
     public static <T> Result<T> fail(SystemErrorTypeEnum systemErrorTypeEnum) {

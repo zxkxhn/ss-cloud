@@ -1,13 +1,17 @@
 package com.ss.core.common;
 
 import io.swagger.annotations.ApiModelProperty;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
+import java.io.Serializable;
 import java.util.Collections;
 import java.util.List;
 
-@Data
-public class PageVO<T> {
+@Getter
+@Setter
+public class PageVO<T> implements Serializable {
+
     private static final long serialVersionUID = -4131430072666231064L;
 
     PageVO() {

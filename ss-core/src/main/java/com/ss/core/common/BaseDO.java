@@ -1,7 +1,8 @@
 package com.ss.core.common;
 
 import io.swagger.annotations.ApiModelProperty;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -13,7 +14,8 @@ import java.util.Date;
  * @Email 980137428@qq.com
  * Date:   2019年11月30日 21:01
  */
-@Data
+@Getter
+@Setter
 public class BaseDO implements Serializable {
 
     private static final long serialVersionUID = 5702408728946256694L;

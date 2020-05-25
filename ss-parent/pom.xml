@@ -26,8 +26,7 @@
         <fastjson.version>1.2.68</fastjson.version>
         <mysql.connector.version>8.0.20</mysql.connector.version>
         <druid.version>1.1.22</druid.version>
-        <springfox.swagger.version>2.9.2</springfox.swagger.version>
-        <knife4j.version>2.0.2</knife4j.version>
+        <knife4j.version>2.0.3</knife4j.version>
         <hutool.version>5.3.5</hutool.version>
         <shardingsphere.version>4.1.0</shardingsphere.version>
         <jjwt.version>0.9.1</jjwt.version>
@@ -114,13 +113,8 @@
 
             <!-- swagger 文档 -->
             <dependency>
-                <groupId>io.springfox</groupId>
-                <artifactId>springfox-swagger2</artifactId>
-                <version>${springfox.swagger.version}</version>
-            </dependency>
-            <dependency>
                 <groupId>com.github.xiaoymin</groupId>
-                <artifactId>knife4j-spring-ui</artifactId>
+                <artifactId>knife4j-spring-boot-starter</artifactId>
                 <version>${knife4j.version}</version>
             </dependency>
 
