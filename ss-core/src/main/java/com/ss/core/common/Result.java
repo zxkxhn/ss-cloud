@@ -35,6 +35,10 @@ public class Result<T> implements Serializable {
         this.msg = msg;
     }
 
+    public Result(String msg) {
+        this.msg = msg;
+    }
+
     public Result(SystemErrorTypeEnum systemErrorTypeEnum) {
         this.code = systemErrorTypeEnum.getCode();
         this.msg = systemErrorTypeEnum.getMsg();
