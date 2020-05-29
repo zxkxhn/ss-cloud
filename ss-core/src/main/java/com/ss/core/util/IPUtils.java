@@ -1,6 +1,10 @@
 package com.ss.core.util;
 
 import cn.hutool.core.util.StrUtil;
+import cn.hutool.http.HttpUtil;
+import com.alibaba.fastjson.JSONObject;
+import eu.bitwalker.useragentutils.Browser;
+import eu.bitwalker.useragentutils.UserAgent;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.servlet.http.HttpServletRequest;
@@ -45,6 +49,23 @@ public class IPUtils {
 //		}
 
         return ip;
+    }
+
+
+    public static String getBrowser(HttpServletRequest request){
+        UserAgent userAgent = UserAgent.parseUserAgentString(request.getHeader("User-Agent"));
+        Browser browser = userAgent.getBrowser();
+        return browser.getName();
+    }
+
+
+    /**
+     * 根据ip获取详细地址
+     */
+    public static String getCityInfo(String ip) {
+        String api = String.format(Constant.Url.IP_URL,ip);
+        JSONObject jsonObject = JSONObject.parseObject(HttpUtil.get(api));
+        return jsonObject.getString("addr");
     }
 
 }

@@ -29,7 +29,7 @@
         <knife4j.version>2.0.3</knife4j.version>
         <hutool.version>5.3.5</hutool.version>
         <shardingsphere.version>4.1.0</shardingsphere.version>
-        <jjwt.version>0.9.1</jjwt.version>
+        <jjwt.version>0.11.1</jjwt.version>
 
         <!-- 三方依赖冲突的jar 版本控制 -->
         <guava.version>22.0</guava.version>
@@ -142,9 +142,27 @@
             <!-- auth -->
             <dependency>
                 <groupId>io.jsonwebtoken</groupId>
-                <artifactId>jjwt</artifactId>
+                <artifactId>jjwt-api</artifactId>
                 <version>${jjwt.version}</version>
             </dependency>
+            <dependency>
+                <groupId>io.jsonwebtoken</groupId>
+                <artifactId>jjwt-impl</artifactId>
+                <version>${jjwt.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.jsonwebtoken</groupId>
+                <artifactId>jjwt-jackson</artifactId>
+                <version>${jjwt.version}</version>
+            </dependency>
+
+            <!-- 解析客户端操作系统、浏览器信息 感觉不会更新了-->
+            <dependency>
+                <groupId>eu.bitwalker</groupId>
+                <artifactId>UserAgentUtils</artifactId>
+                <version>1.21</version>
+            </dependency>
+
 
             <dependency>
                 <artifactId>guava</artifactId>
