@@ -19,15 +19,15 @@
         <maven.compiler.target>${java.version}</maven.compiler.target>
 
         <spring.boot.version>2.3.0.RELEASE</spring.boot.version>
-        <spring.cloud.version>Hoxton.SR4</spring.cloud.version>
+        <spring.cloud.version>Hoxton.SR5</spring.cloud.version>
         <spring.cloud.alibaba.version>2.2.1.RELEASE</spring.cloud.alibaba.version>
 
-        <mybatisplus.version>3.3.1</mybatisplus.version>
-        <fastjson.version>1.2.68</fastjson.version>
+        <mybatisplus.version>3.3.2</mybatisplus.version>
+        <fastjson.version>1.2.70</fastjson.version>
         <mysql.connector.version>8.0.20</mysql.connector.version>
         <druid.version>1.1.22</druid.version>
         <knife4j.version>2.0.3</knife4j.version>
-        <hutool.version>5.3.5</hutool.version>
+        <hutool.version>5.3.6</hutool.version>
         <shardingsphere.version>4.1.0</shardingsphere.version>
         <jjwt.version>0.11.1</jjwt.version>
 
@@ -45,13 +45,13 @@
                 <scope>import</scope>
             </dependency>
             <!-- 暂时没用到 spring cloud 工具 -->
-            <!--            <dependency>-->
-            <!--                <groupId>org.springframework.cloud</groupId>-->
-            <!--                <artifactId>spring-cloud-dependencies</artifactId>-->
-            <!--                <version>${spring.cloud.version}</version>-->
-            <!--                <type>pom</type>-->
-            <!--                <scope>import</scope>-->
-            <!--            </dependency>-->
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring.cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
             <dependency>
                 <groupId>com.alibaba.cloud</groupId>
                 <artifactId>spring-cloud-alibaba-dependencies</artifactId>
