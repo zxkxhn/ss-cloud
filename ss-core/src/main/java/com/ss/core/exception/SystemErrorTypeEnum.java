@@ -24,11 +24,11 @@ public enum SystemErrorTypeEnum {
     /**
      * 错误类型码
      */
-    private int code;
+    private final int code;
     /**
      * 错误类型描述信息
      */
-    private String msg;
+    private final String msg;
 
     SystemErrorTypeEnum(int code, String msg) {
         this.code = code;

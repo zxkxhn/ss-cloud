@@ -110,12 +110,4 @@ public class Result<T> implements Serializable {
     public static <T> Result<T> fail(SystemErrorTypeEnum systemErrorTypeEnum, String msg) {
         return new Result<>(systemErrorTypeEnum.getCode(), msg, null);
     }
-
-
-    public void setData(T data) {
-        this.data = data;
-        this.code = SUCCESSFUL_CODE;
-    }
-
-
 }
