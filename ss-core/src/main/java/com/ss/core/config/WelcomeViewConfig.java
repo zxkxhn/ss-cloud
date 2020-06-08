@@ -16,7 +16,5 @@ public class WelcomeViewConfig implements WebMvcConfigurer {
     public void addViewControllers(ViewControllerRegistry registry) {
         registry.addViewController("/")
                 .setViewName("index.html");
-        //最先执行过滤
-//        registry.setOrder(-1);
     }
 }

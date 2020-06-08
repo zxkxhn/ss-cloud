@@ -27,7 +27,7 @@
         <mysql.connector.version>8.0.20</mysql.connector.version>
         <druid.version>1.1.22</druid.version>
         <knife4j.version>2.0.3</knife4j.version>
-        <hutool.version>5.3.6</hutool.version>
+        <hutool.version>5.3.7</hutool.version>
         <shardingsphere.version>4.1.0</shardingsphere.version>
         <jjwt.version>0.11.1</jjwt.version>
 
