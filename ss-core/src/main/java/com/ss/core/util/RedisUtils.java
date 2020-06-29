@@ -30,7 +30,11 @@ import java.util.concurrent.TimeUnit;
 @Component
 public class RedisUtils<K,V> {
 
-    private RedisTemplate<K,V> redisTemplate;
+    private final RedisTemplate<K,V> redisTemplate;
+
+    public RedisUtils(RedisTemplate<K, V> redisTemplate) {
+        this.redisTemplate = redisTemplate;
+    }
 
 
     /** -------------------key相关操作--------------------- */
@@ -222,7 +226,7 @@ public class RedisUtils<K,V> {
      */
     public boolean setBit(K key, long offset, boolean value) {
         Boolean b =redisTemplate.opsForValue().setBit(key, offset, value);
-        return b == null ? null : b;
+        return b;
     }
 
     /**
@@ -247,7 +251,7 @@ public class RedisUtils<K,V> {
      */
     public boolean setIfAbsent(K key, V value) {
         Boolean b = redisTemplate.opsForValue().setIfAbsent(key, value);
-        return b == null ? null : b;
+        return b;
     }
 
     /**
@@ -288,7 +292,7 @@ public class RedisUtils<K,V> {
      */
     public boolean multiSetIfAbsent(Map<K, V> maps) {
         Boolean b = redisTemplate.opsForValue().multiSetIfAbsent(maps);
-        return b == null ? null : b;
+        return b;
     }
 
     /**
@@ -1167,10 +1171,6 @@ public class RedisUtils<K,V> {
     /**
      * 根据score值获取集合元素数量
      *
-     * @param key
-     * @param min
-     * @param max
-     * @return
      */
     public Long zCount(K key, double min, double max) {
         return redisTemplate.opsForZSet().count(key, min, max);
@@ -1179,8 +1179,6 @@ public class RedisUtils<K,V> {
     /**
      * 获取集合大小
      *
-     * @param key
-     * @return
      */
     public Long zSize(K key) {
         return redisTemplate.opsForZSet().size(key);
@@ -1189,8 +1187,6 @@ public class RedisUtils<K,V> {
     /**
      * 获取集合大小
      *
-     * @param key
-     * @return
      */
     public Long zZCard(K key) {
         return redisTemplate.opsForZSet().zCard(key);
@@ -1199,9 +1195,6 @@ public class RedisUtils<K,V> {
     /**
      * 获取集合中value元素的score值
      *
-     * @param key
-     * @param value
-     * @return
      */
     public Double zScore(K key, V value) {
         return redisTemplate.opsForZSet().score(key, value);
@@ -1210,10 +1203,6 @@ public class RedisUtils<K,V> {
     /**
      * 移除指定索引位置的成员
      *
-     * @param key
-     * @param start
-     * @param end
-     * @return
      */
     public Long zRemoveRange(K key, long start, long end) {
         return redisTemplate.opsForZSet().removeRange(key, start, end);
@@ -1222,10 +1211,6 @@ public class RedisUtils<K,V> {
     /**
      * 根据指定的score值的范围来移除成员
      *
-     * @param key
-     * @param min
-     * @param max
-     * @return
      */
     public Long zRemoveRangeByScore(K key, double min, double max) {
         return redisTemplate.opsForZSet().removeRangeByScore(key, min, max);
@@ -1234,20 +1219,12 @@ public class RedisUtils<K,V> {
     /**
      * 获取key和otherKey的并集并存储在destKey中
      *
-     * @param key
-     * @param otherKey
-     * @param destKey
-     * @return
      */
     public Long zUnionAndStore(K key, K otherKey, K destKey) {
         return redisTemplate.opsForZSet().unionAndStore(key, otherKey, destKey);
     }
 
     /**
-     * @param key
-     * @param otherKeys
-     * @param destKey
-     * @return
      */
     public Long zUnionAndStore(K key, Collection<K> otherKeys,
                                K destKey) {
@@ -1257,11 +1234,6 @@ public class RedisUtils<K,V> {
 
     /**
      * 交集
-     *
-     * @param key
-     * @param otherKey
-     * @param destKey
-     * @return
      */
     public Long zIntersectAndStore(K key, K otherKey,
                                    K destKey) {
@@ -1271,11 +1243,6 @@ public class RedisUtils<K,V> {
 
     /**
      * 交集
-     *
-     * @param key
-     * @param otherKeys
-     * @param destKey
-     * @return
      */
     public Long zIntersectAndStore(K key, Collection<K> otherKeys,
                                    K destKey) {
@@ -1294,11 +1261,6 @@ public class RedisUtils<K,V> {
 
     /**
      * 获取Redis List 序列化
-     *
-     * @param key
-     * @param targetClass
-     * @param <T>
-     * @return
      */
     public <T> List<T> getListCache(final String key, Class<T> targetClass) {
         byte[] result = redisTemplate.execute((RedisCallback<byte[]>) connection -> connection.get(key.getBytes()));
@@ -1310,19 +1272,13 @@ public class RedisUtils<K,V> {
 
     /***
      * 将List 放进缓存里面
-     * @param key
-     * @param objList
-     * @param expireTime
-     * @param <T>
-     * @return
      */
     public <T> boolean putListCacheWithExpireTime(String key, List<T> objList, final long expireTime) {
         final byte[] bkey = key.getBytes();
         final byte[] bvalue = JSONObject.toJSONBytes(objList);
-        Boolean b = redisTemplate.execute((RedisCallback<Boolean>) connection -> {
+        return redisTemplate.execute((RedisCallback<Boolean>) connection -> {
             connection.setEx(bkey, expireTime, bvalue);
             return true;
         });
-        return b == null ? null : b;
     }
 }
